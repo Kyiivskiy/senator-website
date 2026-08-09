@@ -57,6 +57,7 @@
         formNotes: "Примітки до замовлення (необов'язково)",
         formNotesPlaceholder: "Наприклад: подзвонити перед доставкою, потрібна інша дата тощо",
         formErrorRequired: "Заповніть це поле",
+        formConsent: "Погоджуюсь з <a href=\"oferta.html\" target=\"_blank\">умовами оферти</a> та <a href=\"privacy.html\" target=\"_blank\">політикою конфіденційності</a>",
         checkoutSummaryTitle: "Ваше замовлення",
         checkoutTotalLabel: "До сплати",
         checkoutPayCta: "ОПЛАТИТИ КАРТКОЮ <span aria-hidden=\"true\">↗</span>",
@@ -135,7 +136,20 @@
       footer: {
         tagline: "Статус не проголошують. Його носять.",
         copyright: "© 2026 СЕНАТОР",
+        oferta: "Оферта",
+        privacy: "Конфіденційність",
+        returns: "Повернення",
         toTop: "НАГОРУ <span aria-hidden=\"true\">↑</span>"
+      },
+      legal: {
+        ofertaEyebrow: "ПУБЛІЧНА ОФЕРТА",
+        ofertaTitle: "Договір публічної оферти",
+        privacyEyebrow: "ПРАВОВА ІНФОРМАЦІЯ",
+        privacyTitle: "Політика конфіденційності",
+        returnsEyebrow: "ПРАВОВА ІНФОРМАЦІЯ",
+        returnsTitle: "Умови повернення та обміну",
+        enNotice: "Цей документ регулюється законодавством України і надається лише українською мовою. Щоб отримати роз'яснення англійською, зв'яжіться з нами через Instagram.",
+        draftNotice: "Це чернетка на основі типової структури для інтернет-магазинів в Україні, а не юридична консультація. Перед публікацією реквізити [У ДУЖКАХ] потрібно замінити на реальні, а весь текст, особливо розділ про повернення, варто показати бухгалтеру або юристу."
       }
     },
     en: {
@@ -191,6 +205,7 @@
         formNotes: "Order notes (optional)",
         formNotesPlaceholder: "E.g. call before delivery, need a different date, etc.",
         formErrorRequired: "Please fill in this field",
+        formConsent: "I agree to the <a href=\"oferta.html\" target=\"_blank\">public offer</a> and <a href=\"privacy.html\" target=\"_blank\">privacy policy</a>",
         checkoutSummaryTitle: "Your order",
         checkoutTotalLabel: "Total to pay",
         checkoutPayCta: "PAY BY CARD <span aria-hidden=\"true\">↗</span>",
@@ -269,7 +284,20 @@
       footer: {
         tagline: "Status is not announced. It is worn.",
         copyright: "© 2026 SENATOR",
+        oferta: "Public Offer",
+        privacy: "Privacy",
+        returns: "Returns",
         toTop: "BACK TO TOP <span aria-hidden=\"true\">↑</span>"
+      },
+      legal: {
+        ofertaEyebrow: "PUBLIC OFFER",
+        ofertaTitle: "Public Offer Agreement",
+        privacyEyebrow: "LEGAL INFORMATION",
+        privacyTitle: "Privacy Policy",
+        returnsEyebrow: "LEGAL INFORMATION",
+        returnsTitle: "Returns and Exchanges",
+        enNotice: "This document is governed by Ukrainian law and provided in Ukrainian only. For an explanation in English, please contact us via Instagram.",
+        draftNotice: "This is a draft based on a standard structure for Ukrainian online shops, not legal advice. Before publishing, replace the [BRACKETED] placeholders with real business details, and have the full text, especially the returns section, reviewed by an accountant or lawyer."
       }
     }
   };

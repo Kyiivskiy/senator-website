@@ -306,19 +306,32 @@
       syncRecipientFields();
     }
 
+    var consentBox = document.getElementById("field-consent");
+    var consentError = document.getElementById("consent-error");
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var valid = true;
 
       form.querySelectorAll("[required]").forEach(function (field) {
         var group = field.closest(".form-group");
-        if (!field.value.trim()) {
+        var filled = field.type === "checkbox" ? field.checked : field.value.trim();
+        if (!filled) {
           valid = false;
           if (group) group.classList.add("has-error");
         } else if (group) {
           group.classList.remove("has-error");
         }
       });
+
+      if (consentBox) {
+        if (!consentBox.checked) {
+          valid = false;
+          if (consentError) consentError.style.display = "block";
+        } else if (consentError) {
+          consentError.style.display = "none";
+        }
+      }
 
       if (!valid) return;
 

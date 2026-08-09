@@ -144,6 +144,13 @@
           <span data-i18n="shop.checkoutTotalLabel">До сплати</span>
           <span id="checkout-total-value">0 грн</span>
         </div>
+
+        <label class="form-checkbox-row" style="margin-top: 20px;">
+          <input type="checkbox" id="field-consent" name="consent" form="checkout-form" required>
+          <span data-i18n-html="shop.formConsent">Погоджуюсь з <a href="oferta.html" target="_blank">умовами оферти</a> та <a href="privacy.html" target="_blank">політикою конфіденційності</a></span>
+        </label>
+        <span class="form-error" id="consent-error" data-i18n="shop.formErrorRequired">Заповніть це поле</span>
+
         <button type="submit" form="checkout-form" class="btn btn-solid" data-i18n-html="shop.checkoutPayCta">ОПЛАТИТИ КАРТКОЮ <span aria-hidden="true">↗</span></button>
         <p class="payment-badge-row" data-i18n="shop.checkoutPaymentNote">Захищена оплата карткою через LiqPay</p>
         <p class="dev-note" style="margin-top: 20px;" data-i18n="shop.checkoutDevNote">Технічна примітка: оплата ще не підключена до реального LiqPay-акаунта. Кнопка симулює успішне замовлення для перегляду сценарію - реальна інтеграція буде додана після узгодження з магазином.</p>
@@ -160,6 +167,9 @@
       <p class="footer-tagline" data-i18n="footer.tagline">Статус не проголошують. Його носять.</p>
       <div class="footer-meta">
         <span data-i18n="footer.copyright">© 2026 СЕНАТОР</span>
+        <a href="oferta.html" data-i18n="footer.oferta">Оферта</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Конфіденційність</a>
+        <a href="returns.html" data-i18n="footer.returns">Повернення</a>
         <a href="https://www.instagram.com/senator_hermose_mikolaiv_/" target="_blank" rel="noopener noreferrer">INSTAGRAM <span aria-hidden="true">↗</span></a>
         <a href="index.html#top" data-i18n-html="footer.toTop">НАГОРУ <span aria-hidden="true">↑</span></a>
       </div>
