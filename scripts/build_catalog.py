@@ -4,9 +4,13 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "data", "products.json")
+CITIES_PATH = os.path.join(ROOT, "data", "np-cities.json")
 
 with open(DATA_PATH, encoding="utf-8") as f:
     PRODUCTS = json.load(f)
+
+with open(CITIES_PATH, encoding="utf-8") as f:
+    CITIES = json.load(f)
 
 CART_ICON_SVG = (
     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">'
@@ -118,6 +122,15 @@ def build_products_data_js():
     print("wrote", out_path)
 
 
+def build_cities_data_js():
+    out_path = os.path.join(ROOT, "js", "np-cities-data.js")
+    with open(out_path, "w", encoding="utf-8") as f:
+        f.write("window.SENATOR_NP_CITIES = ")
+        json.dump(CITIES, f, ensure_ascii=False, indent=2)
+        f.write(";\n")
+    print("wrote", out_path)
+
+
 def clean_stale_product_pages():
     """Remove product-*.html files for products no longer in products.json."""
     current_ids = {p["id"] for p in PRODUCTS}
@@ -176,7 +189,7 @@ def build_product_pages():
 '''
 
         html = HEAD.format(
-            title=f'{p["name"]["uk"]} — СЕНАТОР',
+            title=f'{p["name"]["uk"]} - СЕНАТОР',
             description=f'{p["name"]["uk"]}, {p["category"]["uk"].lower()} від СЕНАТОР. {p["price"]:,} грн.',
             cart_icon=CART_ICON_SVG,
         ) + body + FOOTER
@@ -189,6 +202,7 @@ def build_product_pages():
 
 if __name__ == "__main__":
     build_products_data_js()
+    build_cities_data_js()
     clean_stale_product_pages()
     build_product_pages()
-    print("done:", len(PRODUCTS), "products")
+    print("done:", len(PRODUCTS), "products,", len(CITIES), "cities")

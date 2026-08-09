@@ -274,6 +274,38 @@
     var form = document.getElementById("checkout-form");
     if (!form) return;
 
+    var cityInput = document.getElementById("field-city");
+    if (cityInput && window.SenatorAutosuggest && window.SENATOR_NP_CITIES) {
+      window.SenatorAutosuggest.attach(cityInput, function () {
+        return window.SENATOR_NP_CITIES;
+      });
+    }
+
+    var recipientSelf = document.getElementById("field-recipient-self");
+    var recipientFields = document.getElementById("recipient-fields");
+    var recipientName = document.getElementById("field-recipient-name");
+    var recipientPhone = document.getElementById("field-recipient-phone");
+
+    function syncRecipientFields() {
+      if (!recipientSelf || !recipientFields) return;
+      var isSelf = recipientSelf.checked;
+      recipientFields.hidden = isSelf;
+      [recipientName, recipientPhone].forEach(function (field) {
+        if (!field) return;
+        if (isSelf) {
+          field.removeAttribute("required");
+          field.closest(".form-group").classList.remove("has-error");
+        } else {
+          field.setAttribute("required", "required");
+        }
+      });
+    }
+
+    if (recipientSelf) {
+      recipientSelf.addEventListener("change", syncRecipientFields);
+      syncRecipientFields();
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var valid = true;
@@ -293,10 +325,25 @@
       try {
         var items = readCart();
         var orderId = "SEN-" + Date.now().toString().slice(-8);
+        var isSelf = !recipientSelf || recipientSelf.checked;
+        var formData = new FormData(form);
         sessionStorage.setItem("senator-last-order", JSON.stringify({
           id: orderId,
           items: items,
-          total: Cart.totalUAH()
+          total: Cart.totalUAH(),
+          contact: {
+            name: formData.get("name"),
+            phone: formData.get("phone"),
+            email: formData.get("email")
+          },
+          delivery: {
+            city: formData.get("city"),
+            branch: formData.get("branch")
+          },
+          recipient: isSelf
+            ? null
+            : { name: formData.get("recipientName"), phone: formData.get("recipientPhone") },
+          notes: formData.get("notes") || ""
         }));
       } catch (err) {}
 

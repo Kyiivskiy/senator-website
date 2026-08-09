@@ -50,15 +50,21 @@
         formEmail: "Email",
         formCity: "Місто",
         formBranch: "Номер відділення",
+        formBranchHint: "Не знаєте номер? Вкажіть орієнтовний, уточнимо телефоном.",
+        formRecipientSelf: "Одержувач - я",
+        formRecipientName: "Ім'я одержувача",
+        formRecipientPhone: "Телефон одержувача",
+        formNotes: "Примітки до замовлення (необов'язково)",
+        formNotesPlaceholder: "Наприклад: подзвонити перед доставкою, потрібна інша дата тощо",
         formErrorRequired: "Заповніть це поле",
         checkoutSummaryTitle: "Ваше замовлення",
         checkoutTotalLabel: "До сплати",
         checkoutPayCta: "ОПЛАТИТИ КАРТКОЮ <span aria-hidden=\"true\">↗</span>",
         checkoutPaymentNote: "Захищена оплата карткою через LiqPay",
-        checkoutDevNote: "Технічна примітка: оплата ще не підключена до реального LiqPay-акаунта. Кнопка симулює успішне замовлення для перегляду сценарію — реальна інтеграція буде додана після узгодження з магазином.",
+        checkoutDevNote: "Технічна примітка: оплата ще не підключена до реального LiqPay-акаунта. Кнопка симулює успішне замовлення для перегляду сценарію - реальна інтеграція буде додана після узгодження з магазином.",
         confirmEyebrow: "ЗАМОВЛЕННЯ ПРИЙНЯТО",
         confirmTitle: "Дякуємо за замовлення.",
-        confirmBody: "Це демонстраційне підтвердження — оплата ще не підключена до реального банку. Коли інтеграція буде готова, тут з'явиться справжнє замовлення, і ми зв'яжемося з вами для підтвердження деталей.",
+        confirmBody: "Це демонстраційне підтвердження - оплата ще не підключена до реального банку. Коли інтеграція буде готова, тут з'явиться справжнє замовлення, і ми зв'яжемося з вами для підтвердження деталей.",
         confirmOrderLabel: "Номер замовлення",
         confirmBackHome: "НА ГОЛОВНУ",
         confirmContinue: "ПРОДОВЖИТИ ПОКУПКИ <span aria-hidden=\"true\">↗</span>"
@@ -178,6 +184,12 @@
         formEmail: "Email",
         formCity: "City",
         formBranch: "Branch number",
+        formBranchHint: "Don't know the number? Give an approximate one, we'll confirm by phone.",
+        formRecipientSelf: "I am the recipient",
+        formRecipientName: "Recipient's full name",
+        formRecipientPhone: "Recipient's phone",
+        formNotes: "Order notes (optional)",
+        formNotesPlaceholder: "E.g. call before delivery, need a different date, etc.",
         formErrorRequired: "Please fill in this field",
         checkoutSummaryTitle: "Your order",
         checkoutTotalLabel: "Total to pay",
@@ -288,6 +300,11 @@
     document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
       var value = getValue(lang, el.getAttribute("data-i18n-alt"));
       if (value != null) el.setAttribute("aria-label", value);
+    });
+
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (el) {
+      var value = getValue(lang, el.getAttribute("data-i18n-placeholder"));
+      if (value != null) el.setAttribute("placeholder", value);
     });
 
     var titleEl = document.querySelector("[data-i18n-title]");
