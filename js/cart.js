@@ -4,6 +4,12 @@
   var STORAGE_KEY = "senator-cart";
   var CURRENCY_UAH = "грн";
 
+  // Filled in after the backend is deployed (see backend/README.md).
+  // Left empty, the notification call is skipped and checkout behaves
+  // exactly as before -- nothing breaks while this is unset.
+  var ORDER_NOTIFY_URL = "";
+  var ORDER_API_KEY = "";
+
   function readCart() {
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -335,30 +341,54 @@
 
       if (!valid) return;
 
+      var orderId = "SEN-" + Date.now().toString().slice(-8);
+      var isSelf = !recipientSelf || recipientSelf.checked;
+      var formData = new FormData(form);
+      var lang = currentLang();
+
+      var resolvedItems = readCart().map(function (item) {
+        var product = findProduct(item.id);
+        return {
+          name: product ? product.name[lang] : item.id,
+          size: item.size,
+          qty: item.qty,
+          lineTotal: product ? product.price * item.qty : 0
+        };
+      });
+
+      var order = {
+        id: orderId,
+        items: resolvedItems,
+        total: Cart.totalUAH(),
+        contact: {
+          name: formData.get("name"),
+          phone: formData.get("phone"),
+          email: formData.get("email")
+        },
+        delivery: {
+          city: formData.get("city"),
+          branch: formData.get("branch")
+        },
+        recipient: isSelf
+          ? null
+          : { name: formData.get("recipientName"), phone: formData.get("recipientPhone") },
+        notes: formData.get("notes") || ""
+      };
+
       try {
-        var items = readCart();
-        var orderId = "SEN-" + Date.now().toString().slice(-8);
-        var isSelf = !recipientSelf || recipientSelf.checked;
-        var formData = new FormData(form);
-        sessionStorage.setItem("senator-last-order", JSON.stringify({
-          id: orderId,
-          items: items,
-          total: Cart.totalUAH(),
-          contact: {
-            name: formData.get("name"),
-            phone: formData.get("phone"),
-            email: formData.get("email")
-          },
-          delivery: {
-            city: formData.get("city"),
-            branch: formData.get("branch")
-          },
-          recipient: isSelf
-            ? null
-            : { name: formData.get("recipientName"), phone: formData.get("recipientPhone") },
-          notes: formData.get("notes") || ""
-        }));
+        sessionStorage.setItem("senator-last-order", JSON.stringify(order));
       } catch (err) {}
+
+      if (ORDER_NOTIFY_URL) {
+        try {
+          fetch(ORDER_NOTIFY_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "X-API-Key": ORDER_API_KEY },
+            body: JSON.stringify(order),
+            keepalive: true
+          }).catch(function () {});
+        } catch (err) {}
+      }
 
       Cart.clear();
       window.location.href = "order-success.html";
