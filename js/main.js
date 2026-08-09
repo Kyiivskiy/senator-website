@@ -45,7 +45,7 @@
         body: "Весілля. Випускний. Перша велика угода. Офіційна зустріч. Або звичайний день, у якому ви обираєте виглядати відповідно до власних стандартів."
       },
       hermose: {
-        body: "Офіційний представник в Україні. Турецький бренд чоловічого одягу, що поєднує класичну школу, сучасний крій, комфорт і виразні матеріали.",
+        body: "Офіційний представник в Україні. Турецький бренд чоловічого одягу, що поєднує класичну школу, сучасний крій, комфорт і виразні матеріали. У салоні СЕНАТОР представлені костюми, піджаки, сорочки та аксесуари HERMOSE для ділових і вечірніх образів.",
         fact: "ВИРОБНИЦТВО · ТУРЕЧЧИНА",
         cta: "ДІЗНАТИСЯ ПРО БРЕНД <span aria-hidden=\"true\">↗</span>",
         imageAlt: "Два чоловіки в костюмах HERMOSE, світлому та темно-синьому"
@@ -67,7 +67,7 @@
       story: {
         title: "15 років характеру.",
         lead: "СЕНАТОР почався з кількох костюмів і маленької торгової точки на ринку. Ринок став першою адресою. Але ніколи не був межею.",
-        body: "Наталя побудувала справу, яка продовжувала зростати незалежно від обставин. Поруч із нею - Людмила, подруга та незмінна менеджерка магазину, яка пройшла разом із СЕНАТОРОМ майже весь його шлях.",
+        body: "Наталія побудувала справу, яка продовжувала зростати незалежно від обставин. Поруч із нею - Людмила, подруга та незмінна менеджерка магазину, яка пройшла разом із СЕНАТОРОМ майже весь його шлях.",
         strongLine: "Кризи. Переїзди. COVID. Війна.",
         final: "Сьогодні це великий бутик у самому серці Миколаєва та офіційний представник HERMOSE в Україні.",
         link: "ЗАВІТАТИ ДО САЛОНУ <span aria-hidden=\"true\">↗</span>",
@@ -77,7 +77,7 @@
         eyebrow: "ВІЗИТ",
         title: "Ваш костюм чекає на<br>особисте знайомство.",
         address: "вул. Велика Морська, 69а, Миколаїв",
-        hours: "Щодня · 09:00-18:00",
+        hours: "Щодня · 10:00-19:00",
         ctaPrimary: "ПРОКЛАСТИ МАРШРУТ <span aria-hidden=\"true\">↗</span>",
         ctaSecondary: "НАПИСАТИ В INSTAGRAM <span aria-hidden=\"true\">↗</span>"
       },
@@ -128,7 +128,7 @@
         body: "A wedding. A graduation. A major deal. An official meeting. Or an ordinary day on which you choose to look the way your own standards demand."
       },
       hermose: {
-        body: "Official representative in Ukraine. A Turkish menswear brand that combines classic tailoring, a modern cut, comfort, and expressive materials.",
+        body: "Official representative in Ukraine. A Turkish menswear brand that combines classic tailoring, a modern cut, comfort, and expressive materials. SENATOR carries HERMOSE suits, blazers, shirts, and accessories for both business and evening looks.",
         fact: "MANUFACTURED · TURKEY",
         cta: "DISCOVER THE BRAND <span aria-hidden=\"true\">↗</span>",
         imageAlt: "Two men wearing HERMOSE suits, one light and one dark navy"
@@ -160,7 +160,7 @@
         eyebrow: "VISIT",
         title: "Your suit is waiting for<br>a personal introduction.",
         address: "69a Velyka Morska Street, Mykolaiv",
-        hours: "Daily · 09:00-18:00",
+        hours: "Daily · 10:00-19:00",
         ctaPrimary: "GET DIRECTIONS <span aria-hidden=\"true\">↗</span>",
         ctaSecondary: "MESSAGE ON INSTAGRAM <span aria-hidden=\"true\">↗</span>"
       },

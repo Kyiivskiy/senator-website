@@ -686,7 +686,7 @@ blockquote {
   margin-bottom: 26px;
 }
 
-.hermose-panel .body-text { margin-bottom: 30px; max-width: 32ch; }
+.hermose-panel .body-text { color: rgba(232, 224, 211, 0.78); margin-bottom: 30px; max-width: 32ch; }
 
 .hermose-fact {
   font-size: 10px;
