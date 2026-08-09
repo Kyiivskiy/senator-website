@@ -15,9 +15,54 @@
         hermose: "HERMOSE",
         looks: "Образи",
         story: "Історія",
-        visit: "Візит"
+        visit: "Візит",
+        catalog: "Каталог"
       },
       header: { cta: "Візит <span aria-hidden=\"true\">↗</span>" },
+      shop: {
+        catalogEyebrow: "КАТАЛОГ СЕНАТОРА",
+        catalogTitle: "Всі образи в одному місці.",
+        catalogLead: "Костюми, піджаки, сорочки та аксесуари HERMOSE. Фото та описи ще уточнюються.",
+        filterAll: "Всі товари",
+        sortLabel: "Сортувати",
+        sortNameAsc: "За назвою (А-Я)",
+        sortPriceAsc: "Спочатку дешевші",
+        sortPriceDesc: "Спочатку дорожчі",
+        noResults: "У цій категорії поки немає товарів.",
+        backToCatalog: "До каталогу",
+        addToCart: "ДОДАТИ В КОШИК <span aria-hidden=\"true\">↗</span>",
+        sizeLabel: "Розмір",
+        qtyLabel: "Кількість",
+        cartEyebrow: "ВАШЕ ЗАМОВЛЕННЯ",
+        cartTitle: "Кошик",
+        cartEmptyText: "Ваш кошик порожній.",
+        cartEmptyCta: "ПЕРЕГЛЯНУТИ КАТАЛОГ <span aria-hidden=\"true\">↗</span>",
+        cartSubtotalLabel: "Проміжний підсумок",
+        cartDeliveryNote: "Вартість доставки Новою Поштою розраховується на наступному кроці.",
+        cartTotalLabel: "Разом",
+        cartCheckoutCta: "ОФОРМИТИ ЗАМОВЛЕННЯ <span aria-hidden=\"true\">↗</span>",
+        checkoutEyebrow: "ОСТАННІЙ КРОК",
+        checkoutTitle: "Оформлення замовлення",
+        checkoutContactLegend: "Контактні дані",
+        checkoutDeliveryLegend: "Доставка Новою Поштою",
+        formName: "Ім'я та прізвище",
+        formPhone: "Телефон",
+        formEmail: "Email",
+        formCity: "Місто",
+        formBranch: "Номер відділення",
+        formErrorRequired: "Заповніть це поле",
+        checkoutSummaryTitle: "Ваше замовлення",
+        checkoutTotalLabel: "До сплати",
+        checkoutPayCta: "ОПЛАТИТИ КАРТКОЮ <span aria-hidden=\"true\">↗</span>",
+        checkoutPaymentNote: "Захищена оплата карткою через LiqPay",
+        checkoutDevNote: "Технічна примітка: оплата ще не підключена до реального LiqPay-акаунта. Кнопка симулює успішне замовлення для перегляду сценарію — реальна інтеграція буде додана після узгодження з магазином.",
+        confirmEyebrow: "ЗАМОВЛЕННЯ ПРИЙНЯТО",
+        confirmTitle: "Дякуємо за замовлення.",
+        confirmBody: "Це демонстраційне підтвердження — оплата ще не підключена до реального банку. Коли інтеграція буде готова, тут з'явиться справжнє замовлення, і ми зв'яжемося з вами для підтвердження деталей.",
+        confirmOrderLabel: "Номер замовлення",
+        confirmBackHome: "НА ГОЛОВНУ",
+        confirmContinue: "ПРОДОВЖИТИ ПОКУПКИ <span aria-hidden=\"true\">↗</span>"
+      },
       hero: {
         eyebrow: "САЛОН ЧОЛОВІЧОЇ КЛАСИКИ · МИКОЛАЇВ",
         titleLine1: "Характер",
@@ -65,7 +110,7 @@
         step3: { title: "Примірка", body: "Оцінюємо посадку, пропорції та кожну деталь майбутнього образу." }
       },
       story: {
-        title: "15 років характеру.",
+        title: "17 років характеру.",
         lead: "СЕНАТОР почався з кількох костюмів і маленької торгової точки на ринку. Ринок став першою адресою. Але ніколи не був межею.",
         body: "Наталія побудувала справу, яка продовжувала зростати незалежно від обставин. Поруч із нею - Людмила, подруга та незмінна менеджерка магазину, яка пройшла разом із СЕНАТОРОМ майже весь його шлях.",
         strongLine: "Кризи. Переїзди. COVID. Війна.",
@@ -98,9 +143,54 @@
         hermose: "HERMOSE",
         looks: "Looks",
         story: "Story",
-        visit: "Visit"
+        visit: "Visit",
+        catalog: "Catalog"
       },
       header: { cta: "Visit <span aria-hidden=\"true\">↗</span>" },
+      shop: {
+        catalogEyebrow: "SENATOR CATALOG",
+        catalogTitle: "All the looks in one place.",
+        catalogLead: "Suits, blazers, shirts, and HERMOSE accessories. Photos and descriptions are still being finalized.",
+        filterAll: "All products",
+        sortLabel: "Sort",
+        sortNameAsc: "Name (A-Z)",
+        sortPriceAsc: "Price: low to high",
+        sortPriceDesc: "Price: high to low",
+        noResults: "No products in this category yet.",
+        backToCatalog: "Back to catalog",
+        addToCart: "ADD TO CART <span aria-hidden=\"true\">↗</span>",
+        sizeLabel: "Size",
+        qtyLabel: "Quantity",
+        cartEyebrow: "YOUR ORDER",
+        cartTitle: "Cart",
+        cartEmptyText: "Your cart is empty.",
+        cartEmptyCta: "BROWSE CATALOG <span aria-hidden=\"true\">↗</span>",
+        cartSubtotalLabel: "Subtotal",
+        cartDeliveryNote: "Nova Poshta delivery cost is calculated at the next step.",
+        cartTotalLabel: "Total",
+        cartCheckoutCta: "PROCEED TO CHECKOUT <span aria-hidden=\"true\">↗</span>",
+        checkoutEyebrow: "FINAL STEP",
+        checkoutTitle: "Checkout",
+        checkoutContactLegend: "Contact details",
+        checkoutDeliveryLegend: "Nova Poshta delivery",
+        formName: "Full name",
+        formPhone: "Phone",
+        formEmail: "Email",
+        formCity: "City",
+        formBranch: "Branch number",
+        formErrorRequired: "Please fill in this field",
+        checkoutSummaryTitle: "Your order",
+        checkoutTotalLabel: "Total to pay",
+        checkoutPayCta: "PAY BY CARD <span aria-hidden=\"true\">↗</span>",
+        checkoutPaymentNote: "Secure card payment via LiqPay",
+        checkoutDevNote: "Developer note: payment is not yet connected to a live LiqPay account. This button simulates a successful order so you can preview the flow. Real integration will be added once the shop's merchant account is approved.",
+        confirmEyebrow: "ORDER RECEIVED",
+        confirmTitle: "Thank you for your order.",
+        confirmBody: "This is a demo confirmation. Payment is not yet connected to a real bank account. Once the integration is live, this will show a real order and we will contact you to confirm the details.",
+        confirmOrderLabel: "Order number",
+        confirmBackHome: "BACK TO HOME",
+        confirmContinue: "CONTINUE SHOPPING <span aria-hidden=\"true\">↗</span>"
+      },
       hero: {
         eyebrow: "CLASSIC MENSWEAR SALON · MYKOLAIV",
         titleLine1: "Character",
@@ -148,7 +238,7 @@
         step3: { title: "Fitting", body: "We assess the fit, proportions, and every detail of the future look." }
       },
       story: {
-        title: "15 years of character.",
+        title: "17 years of character.",
         lead: "SENATOR began with a handful of suits and a small stall at the market. The market became the first address. But it was never a limit.",
         body: "Natalia built a business that kept growing regardless of circumstances. Beside her - Liudmyla, a friend and the shop's steady manager, who has walked almost the entire path together with SENATOR.",
         strongLine: "Crises. Relocations. COVID. War.",
@@ -224,6 +314,8 @@
     }
 
     try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+
+    document.dispatchEvent(new CustomEvent("senator:langchange", { detail: { lang: lang } }));
   }
 
   function initLanguage() {

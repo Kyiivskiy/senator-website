@@ -28,6 +28,7 @@
     <nav class="main-nav" aria-label="Основна навігація">
       <a href="#salon" data-i18n="nav.salon">Про салон</a>
       <a href="#hermose" data-i18n="nav.hermose">HERMOSE</a>
+      <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
       <a href="#looks" data-i18n="nav.looks">Образи</a>
       <a href="#story" data-i18n="nav.story">Історія</a>
       <a href="#visit" data-i18n="nav.visit">Візит</a>
@@ -37,6 +38,10 @@
       <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Змінити мову сайту">
         <span id="lang-toggle-label">EN</span>
       </button>
+      <a class="cart-link" href="cart.html" aria-label="Кошик">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 8h12l-1 12.5a1 1 0 0 1-1 .9H8a1 1 0 0 1-1-.9L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+        <span class="cart-badge" data-count="0"></span>
+      </a>
       <a class="btn btn-outline-light header-cta" href="#visit" data-i18n-html="header.cta">Візит <span aria-hidden="true">↗</span></a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
@@ -50,6 +55,7 @@
   <nav aria-label="Мобільна навігація">
     <a href="#salon" data-i18n="nav.salon">Про салон</a>
     <a href="#hermose" data-i18n="nav.hermose">HERMOSE</a>
+    <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
     <a href="#looks" data-i18n="nav.looks">Образи</a>
     <a href="#story" data-i18n="nav.story">Історія</a>
     <a href="#visit" data-i18n="nav.visit">Візит</a>
@@ -83,7 +89,7 @@
   <section class="stats-bar reveal">
     <div class="shell stats-grid">
       <div class="stat">
-        <span class="stat-value">15 <span data-i18n="stats.years.unit">років</span></span>
+        <span class="stat-value">17 <span data-i18n="stats.years.unit">років</span></span>
         <span class="stat-label" data-i18n="stats.years.label">характеру та досвіду</span>
       </div>
       <div class="stat">
@@ -202,7 +208,7 @@
   <section class="story" id="story">
     <div class="shell story-grid">
       <div class="story-text reveal">
-        <h2 data-i18n="story.title">15 років характеру.</h2>
+        <h2 data-i18n="story.title">17 років характеру.</h2>
         <p class="story-lead" data-i18n="story.lead">СЕНАТОР почався з кількох костюмів і маленької торгової точки на ринку. Ринок став першою адресою. Але ніколи не був межею.</p>
         <p class="body-text" data-i18n="story.body">Наталія побудувала справу, яка продовжувала зростати незалежно від обставин. Поруч із нею - Людмила, подруга та незмінна менеджерка магазину, яка пройшла разом із СЕНАТОРОМ майже весь його шлях.</p>
         <p class="story-strong" data-i18n="story.strongLine">Кризи. Переїзди. COVID. Війна.</p>
@@ -223,7 +229,7 @@
             aria-label="Крупний план рук, що поправляють білу манжету поверх темного піджака">
             <source src="video/senator-detail-loop.mp4" type="video/mp4">
           </video>
-          <span class="story-years">2011-2026</span>
+          <span class="story-years">2009-2026</span>
         </div>
       </div>
     </div>
@@ -273,6 +279,8 @@
   </div>
 </footer>
 
+<script src="js/products-data.js"></script>
+<script src="js/cart.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n-title="meta.title">Біла сорочка — СЕНАТОР</title>
+<meta name="description" content="Біла сорочка, сорочки від СЕНАТОР. 12,000 грн." data-i18n-meta="meta.description">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Перейти до основного змісту</a>
+
+<header class="site-header" id="site-header">
+  <div class="shell header-inner">
+    <a class="wordmark-link" href="index.html">
+      <span class="wordmark" data-i18n="brand.name">СЕНАТОР</span>
+      <span class="wordmark-sub">MAISON OF MENSWEAR</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Основна навігація">
+      <a href="index.html#salon" data-i18n="nav.salon">Про салон</a>
+      <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
+      <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+      <a href="index.html#story" data-i18n="nav.story">Історія</a>
+      <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
+    </nav>
+
+    <div class="header-actions">
+      <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Змінити мову сайту">
+        <span id="lang-toggle-label">EN</span>
+      </button>
+      <a class="cart-link" href="cart.html" aria-label="Кошик">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 8h12l-1 12.5a1 1 0 0 1-1 .9H8a1 1 0 0 1-1-.9L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
+        <span class="cart-badge" data-count="0"></span>
+      </a>
+      <a class="btn btn-outline-light header-cta" href="index.html#visit" data-i18n-html="header.cta">Візит <span aria-hidden="true">↗</span></a>
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Меню</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <nav aria-label="Мобільна навігація">
+    <a href="index.html#salon" data-i18n="nav.salon">Про салон</a>
+    <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
+    <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
+    <a href="index.html#story" data-i18n="nav.story">Історія</a>
+    <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
+  </nav>
+</div>
+
+<main id="main">
+  <section class="product-page">
+    <div class="shell">
+      <a class="back-link" href="catalog.html"><span aria-hidden="true">←</span> <span data-i18n="shop.backToCatalog">До каталогу</span></a>
+
+      <div class="product-layout">
+        <div class="product-detail-media">
+          <div class="product-placeholder tone-2">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M18 10h12l3 6h5l-2 26H12L10 16h5l3-6z"/><path d="M18 10a6 6 0 0 0 12 0"/></svg>
+            <span>ФОТО ТОВАРУ</span>
+          </div>
+        </div>
+
+        <div class="product-detail-info">
+          <p class="product-detail-category">Одяг · Сорочки</p>
+          <h1>Біла сорочка</h1>
+          <p class="product-detail-price">12,000 грн <span style="color: var(--muted); font-weight: 400; font-size: 14px;">(≈ $300)</span></p>
+
+          <p class="option-label" data-i18n="shop.sizeLabel">Розмір</p>
+          <div class="size-selector">
+            <button type="button" class="size-btn" data-size="S" aria-pressed="false">S</button>
+            <button type="button" class="size-btn" data-size="M" aria-pressed="false">M</button>
+            <button type="button" class="size-btn" data-size="L" aria-pressed="false">L</button>
+            <button type="button" class="size-btn" data-size="XL" aria-pressed="false">XL</button>
+            <button type="button" class="size-btn" data-size="XXL" aria-pressed="false">XXL</button>
+          </div>
+
+          <p class="option-label" data-i18n="shop.qtyLabel">Кількість</p>
+          <div class="add-row">
+            <div class="qty-stepper">
+              <button type="button" id="qty-minus" aria-label="Зменшити кількість">−</button>
+              <input type="text" id="product-qty" class="qty-input" value="1" inputmode="numeric" readonly>
+              <button type="button" id="qty-plus" aria-label="Збільшити кількість">+</button>
+            </div>
+            <button type="button" class="btn btn-solid" id="add-to-cart" data-product-id="white-shirt" data-i18n-html="shop.addToCart">ДОДАТИ В КОШИК <span aria-hidden="true">↗</span></button>
+          </div>
+
+          <p class="product-detail-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="shell">
+    <p class="footer-wordmark" data-i18n="brand.name">СЕНАТОР</p>
+    <div class="footer-row">
+      <p class="footer-tagline" data-i18n="footer.tagline">Статус не проголошують. Його носять.</p>
+      <div class="footer-meta">
+        <span data-i18n="footer.copyright">© 2026 СЕНАТОР</span>
+        <a href="https://www.instagram.com/senator_hermose_mikolaiv_/" target="_blank" rel="noopener noreferrer">INSTAGRAM <span aria-hidden="true">↗</span></a>
+        <a href="index.html#top" data-i18n-html="footer.toTop">НАГОРУ <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/products-data.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
