@@ -4,11 +4,8 @@
   var STORAGE_KEY = "senator-cart";
   var CURRENCY_UAH = "грн";
 
-  // Filled in after the backend is deployed (see backend/README.md).
-  // Left empty, the notification call is skipped and checkout behaves
-  // exactly as before -- nothing breaks while this is unset.
-  var ORDER_NOTIFY_URL = "";
-  var ORDER_API_KEY = "";
+  var ORDER_NOTIFY_URL = "https://senator-backend.onrender.com/api/notify-order";
+  var ORDER_API_KEY = "u-M49VC0-u_azu8a095TezYA_gscB5TLkKlJB5Fddvo";
 
   function readCart() {
     try {
