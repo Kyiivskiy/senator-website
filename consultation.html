@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n-title="meta.title">Кошик - СЕНАТОР</title>
-<meta name="description" content="Кошик замовлень СЕНАТОР." data-i18n-meta="meta.description">
+<title data-i18n-title="meta.title">Консультація по телефону - СЕНАТОР</title>
+<meta name="description" content="Замовте консультацію по телефону в салоні СЕНАТОР." data-i18n-meta="meta.description">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +27,7 @@
       <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
       <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
       <a href="index.html#story" data-i18n="nav.story">Історія</a>
+      <a href="fitting.html" data-i18n="nav.fitting">Записатися на примірку</a>
       <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
     </nav>
 
@@ -34,10 +35,6 @@
       <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Змінити мову сайту">
         <span id="lang-toggle-label">EN</span>
       </button>
-      <a class="cart-link" href="cart.html" aria-label="Кошик">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 8h12l-1 12.5a1 1 0 0 1-1 .9H8a1 1 0 0 1-1-.9L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
-        <span class="cart-badge" data-count="0"></span>
-      </a>
       <a class="btn btn-outline-light header-cta" href="index.html#visit" data-i18n-html="header.cta">Візит <span aria-hidden="true">↗</span></a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
@@ -53,6 +50,7 @@
     <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
     <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
     <a href="index.html#story" data-i18n="nav.story">Історія</a>
+    <a href="fitting.html" data-i18n="nav.fitting">Записатися на примірку</a>
     <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
   </nav>
 </div>
@@ -61,33 +59,45 @@
 
   <section class="page-header">
     <div class="shell">
-      <p class="eyebrow" data-i18n="shop.cartEyebrow">ВАШЕ ЗАМОВЛЕННЯ</p>
-      <h1 class="page-title" data-i18n="shop.cartTitle">Кошик</h1>
+      <p class="eyebrow" data-i18n="shop.consultationEyebrow">КОНСУЛЬТАЦІЯ</p>
+      <h1 class="page-title" data-i18n="shop.consultationTitle">Замовити консультацію по телефону</h1>
+      <p class="page-lead" data-i18n="shop.consultationLead">Залиште номер - менеджер зателефонує і розповість про наявність, розміри та ціни.</p>
     </div>
   </section>
 
-  <section class="cart-section">
-    <div class="shell cart-layout">
-      <div id="cart-list" class="cart-list"></div>
+  <section class="checkout-section">
+    <div class="shell lead-form-shell">
+      <form id="consultation-form" novalidate>
+        <fieldset class="form-fieldset">
+          <legend data-i18n="shop.checkoutContactLegend">Контактні дані</legend>
 
-      <div id="cart-summary" class="cart-summary">
-        <h2 data-i18n="shop.cartTitle">Кошик</h2>
-        <div class="cart-summary-row">
-          <span data-i18n="shop.cartSubtotalLabel">Проміжний підсумок</span>
-          <span id="cart-subtotal">0 грн</span>
-        </div>
-        <div class="cart-summary-row total">
-          <span data-i18n="shop.cartTotalLabel">Разом</span>
-          <span id="cart-total">0 грн</span>
-        </div>
-        <p class="form-note" data-i18n="shop.cartDeliveryNote">Вартість доставки Новою Поштою розраховується на наступному кроці.</p>
-        <a class="btn btn-solid" href="checkout.html" data-i18n-html="shop.cartCheckoutCta">ОФОРМИТИ ЗАМОВЛЕННЯ <span aria-hidden="true">↗</span></a>
-      </div>
+          <div class="form-group">
+            <label for="field-name" data-i18n="shop.formName">Ім'я та прізвище</label>
+            <input type="text" id="field-name" name="name" required autocomplete="name">
+            <span class="form-error" data-i18n="shop.formErrorRequired">Заповніть це поле</span>
+          </div>
 
-      <div id="cart-empty" class="cart-empty" hidden>
-        <p data-i18n="shop.cartEmptyText">Ваш кошик порожній.</p>
-        <a class="btn btn-outline" href="catalog.html" data-i18n-html="shop.cartEmptyCta">ПЕРЕГЛЯНУТИ КАТАЛОГ <span aria-hidden="true">↗</span></a>
-      </div>
+          <div class="form-group">
+            <label for="field-phone" data-i18n="shop.formPhone">Телефон</label>
+            <input type="tel" id="field-phone" name="phone" required autocomplete="tel">
+            <span class="form-error" data-i18n="shop.formErrorRequired">Заповніть це поле</span>
+          </div>
+
+          <div class="form-group">
+            <label for="field-call-time" data-i18n="shop.formCallTime">Зручний час для дзвінка</label>
+            <input type="text" id="field-call-time" name="callTime" required data-i18n-placeholder="shop.formCallTimePlaceholder" placeholder="Наприклад: будь-коли, або після 17:00">
+            <span class="form-error" data-i18n="shop.formErrorRequired">Заповніть це поле</span>
+          </div>
+        </fieldset>
+
+        <label class="form-checkbox-row">
+          <input type="checkbox" id="field-consent" name="consent" required>
+          <span data-i18n-html="shop.formConsent">Погоджуюсь з <a href="privacy.html" target="_blank">політикою конфіденційності</a></span>
+        </label>
+        <span class="form-error" id="consent-error" data-i18n="shop.formErrorRequired">Заповніть це поле</span>
+
+        <button type="submit" class="btn btn-solid" data-i18n-html="shop.consultationSubmitCta">ЗАМОВИТИ КОНСУЛЬТАЦІЮ <span aria-hidden="true">↗</span></button>
+      </form>
     </div>
   </section>
 
@@ -100,9 +110,7 @@
       <p class="footer-tagline" data-i18n="footer.tagline">Статус не проголошують. Його носять.</p>
       <div class="footer-meta">
         <span data-i18n="footer.copyright">© 2026 СЕНАТОР</span>
-        <a href="oferta.html" data-i18n="footer.oferta">Оферта</a>
         <a href="privacy.html" data-i18n="footer.privacy">Конфіденційність</a>
-        <a href="returns.html" data-i18n="footer.returns">Повернення</a>
         <a href="https://www.instagram.com/senator_hermose_mikolaiv_/" target="_blank" rel="noopener noreferrer">INSTAGRAM <span aria-hidden="true">↗</span></a>
         <a href="index.html#top" data-i18n-html="footer.toTop">НАГОРУ <span aria-hidden="true">↑</span></a>
       </div>
@@ -111,7 +119,7 @@
 </footer>
 
 <script src="js/products-data.js"></script>
-<script src="js/cart.js"></script>
+<script src="js/leads.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -27,6 +27,7 @@
       <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
       <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
       <a href="index.html#story" data-i18n="nav.story">Історія</a>
+      <a href="fitting.html" data-i18n="nav.fitting">Записатися на примірку</a>
       <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
     </nav>
 
@@ -34,10 +35,6 @@
       <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Змінити мову сайту">
         <span id="lang-toggle-label">EN</span>
       </button>
-      <a class="cart-link" href="cart.html" aria-label="Кошик">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 8h12l-1 12.5a1 1 0 0 1-1 .9H8a1 1 0 0 1-1-.9L6 8z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>
-        <span class="cart-badge" data-count="0"></span>
-      </a>
       <a class="btn btn-outline-light header-cta" href="index.html#visit" data-i18n-html="header.cta">Візит <span aria-hidden="true">↗</span></a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
@@ -53,6 +50,7 @@
     <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
     <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
     <a href="index.html#story" data-i18n="nav.story">Історія</a>
+    <a href="fitting.html" data-i18n="nav.fitting">Записатися на примірку</a>
     <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
   </nav>
 </div>
@@ -75,22 +73,14 @@
           <h1>Класична метелик</h1>
           <p class="product-detail-price">12,000 грн <span style="color: var(--muted); font-weight: 400; font-size: 14px;">(≈ $300)</span></p>
 
-          <p class="option-label" data-i18n="shop.sizeLabel">Розмір</p>
-          <div class="size-selector">
-            <button type="button" class="size-btn" data-size="Один розмір" aria-pressed="false">Один розмір</button>
-          </div>
-
-          <p class="option-label" data-i18n="shop.qtyLabel">Кількість</p>
-          <div class="add-row">
-            <div class="qty-stepper">
-              <button type="button" id="qty-minus" aria-label="Зменшити кількість">−</button>
-              <input type="text" id="product-qty" class="qty-input" value="1" inputmode="numeric" readonly>
-              <button type="button" id="qty-plus" aria-label="Збільшити кількість">+</button>
-            </div>
-            <button type="button" class="btn btn-solid" id="add-to-cart" data-product-id="bow-tie" data-i18n-html="shop.addToCart">ДОДАТИ В КОШИК <span aria-hidden="true">↗</span></button>
-          </div>
-
           <p class="product-detail-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+
+          <p class="product-availability-note" data-i18n="shop.productNote">Наявність розміру та кількості уточнює менеджер під час дзвінка.</p>
+
+          <div class="product-cta-row">
+            <a class="btn btn-solid" href="fitting.html?product=bow-tie" data-i18n-html="shop.productCtaFitting">ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="consultation.html" data-i18n-html="shop.productCtaConsultation">ЗАМОВИТИ КОНСУЛЬТАЦІЮ ПО ТЕЛЕФОНУ <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -105,9 +95,7 @@
       <p class="footer-tagline" data-i18n="footer.tagline">Статус не проголошують. Його носять.</p>
       <div class="footer-meta">
         <span data-i18n="footer.copyright">© 2026 СЕНАТОР</span>
-        <a href="oferta.html" data-i18n="footer.oferta">Оферта</a>
         <a href="privacy.html" data-i18n="footer.privacy">Конфіденційність</a>
-        <a href="returns.html" data-i18n="footer.returns">Повернення</a>
         <a href="https://www.instagram.com/senator_hermose_mikolaiv_/" target="_blank" rel="noopener noreferrer">INSTAGRAM <span aria-hidden="true">↗</span></a>
         <a href="index.html#top" data-i18n-html="footer.toTop">НАГОРУ <span aria-hidden="true">↑</span></a>
       </div>
@@ -116,7 +104,6 @@
 </footer>
 
 <script src="js/products-data.js"></script>
-<script src="js/cart.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
 """
-SENATOR order-notification backend.
+SENATOR lead-notification backend.
 
-One job: receive an order from the checkout page and send a formatted
-message to the shop's Telegram bot. Kept deliberately tiny so the same
-service can later grow a LiqPay payment-signing endpoint without a
-rewrite (see /api/notify-order below for the pattern to copy).
+One job: receive a fitting-booking or phone-consultation request from
+the site and send a formatted message to the shop's Telegram bot. The
+site has no online sale (no cart, no payment) - a manager always calls
+the client back, so this is the entire "order" pipeline.
 
 Environment variables (set in the hosting platform's dashboard, never
 committed to git):
@@ -58,47 +58,29 @@ def send_telegram_message(text):
             raise RuntimeError(f"Telegram API error: {body}")
 
 
-def format_order_message(order):
-    lines = [f"\U0001F4E6 <b>Новый заказ №{escape(order.get('id', '-'))}</b>", ""]
+def format_lead_message(lead):
+    lead_type = lead.get("type")
+    name = escape(lead.get("name", "-"))
+    phone = escape(lead.get("phone", "-"))
+    preferred_time = escape(lead.get("preferredTime", "-"))
 
-    lines.append("<b>Товары:</b>")
-    for item in order.get("items", []):
-        name = escape(item.get("name", "?"))
-        size = escape(item.get("size", "-"))
-        qty = item.get("qty", 1)
-        price = item.get("lineTotal", 0)
-        lines.append(f"• {name}, розмір {size} — {qty} шт. — {price:,} грн".replace(",", " "))
-    lines.append("")
+    if lead_type == "fitting":
+        lines = ["\U0001F4C5 <b>Новая заявка на примерку</b>", ""]
+        lines.append(f"\U0001F464 Имя: {name}")
+        lines.append(f"\U0001F4DE Телефон: {phone}")
+        lines.append(f"\U0001F552 Удобное время: {preferred_time}")
+        product = lead.get("product", "").strip()
+        lines.append(f"\U0001F454 Интересует: {escape(product) if product else 'не указано'}")
+        return "\n".join(lines)
 
-    total = order.get("total", 0)
-    lines.append(f"\U0001F4B0 <b>Сумма: {total:,} грн</b>".replace(",", " "))
-    lines.append("")
+    if lead_type == "consultation":
+        lines = ["\U0001F4DE <b>Заявка на консультацию по телефону</b>", ""]
+        lines.append(f"\U0001F464 Имя: {name}")
+        lines.append(f"\U0001F4DE Телефон: {phone}")
+        lines.append(f"\U0001F552 Удобное время звонка: {preferred_time}")
+        return "\n".join(lines)
 
-    contact = order.get("contact", {})
-    lines.append("\U0001F464 <b>Покупатель</b>")
-    lines.append(f"Имя: {escape(contact.get('name', '-'))}")
-    lines.append(f"Телефон: {escape(contact.get('phone', '-'))}")
-    lines.append(f"Email: {escape(contact.get('email', '-'))}")
-    lines.append("")
-
-    delivery = order.get("delivery", {})
-    lines.append("\U0001F4CD <b>Доставка (Нова Пошта)</b>")
-    lines.append(f"Город: {escape(delivery.get('city', '-'))}")
-    lines.append(f"Отделение: №{escape(delivery.get('branch', '-'))}")
-    lines.append("")
-
-    recipient = order.get("recipient")
-    if recipient:
-        lines.append(f"\U0001F381 <b>Получатель:</b> {escape(recipient.get('name', '-'))}, {escape(recipient.get('phone', '-'))}")
-    else:
-        lines.append("\U0001F381 <b>Получатель:</b> заказ для себя")
-
-    notes = order.get("notes", "").strip()
-    if notes:
-        lines.append("")
-        lines.append(f"\U0001F4DD <b>Примечание:</b> {escape(notes)}")
-
-    return "\n".join(lines)
+    raise ValueError(f"unknown lead type: {lead_type!r}")
 
 
 def escape(value):
@@ -118,20 +100,20 @@ def add_cors_headers(response):
     return response
 
 
-@app.route("/api/notify-order", methods=["POST", "OPTIONS"])
-def notify_order():
+@app.route("/api/notify-lead", methods=["POST", "OPTIONS"])
+def notify_lead():
     if request.method == "OPTIONS":
         return "", 204
 
     if ORDER_API_KEY and request.headers.get("X-API-Key") != ORDER_API_KEY:
         return jsonify({"ok": False, "error": "unauthorized"}), 401
 
-    order = request.get_json(silent=True)
-    if not order:
+    lead = request.get_json(silent=True)
+    if not lead:
         return jsonify({"ok": False, "error": "invalid or missing JSON body"}), 400
 
     try:
-        message = format_order_message(order)
+        message = format_lead_message(lead)
         send_telegram_message(message)
     except Exception as exc:
         return jsonify({"ok": False, "error": str(exc)}), 500

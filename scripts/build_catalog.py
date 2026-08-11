@@ -4,20 +4,9 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(ROOT, "data", "products.json")
-CITIES_PATH = os.path.join(ROOT, "data", "np-cities.json")
 
 with open(DATA_PATH, encoding="utf-8") as f:
     PRODUCTS = json.load(f)
-
-with open(CITIES_PATH, encoding="utf-8") as f:
-    CITIES = json.load(f)
-
-CART_ICON_SVG = (
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">'
-    '<path d="M6 8h12l-1 12.5a1 1 0 0 1-1 .9H8a1 1 0 0 1-1-.9L6 8z"/>'
-    '<path d="M9 8a3 3 0 0 1 6 0"/>'
-    "</svg>"
-)
 
 PRODUCT_PLACEHOLDER_SVG = (
     '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">'
@@ -55,6 +44,7 @@ HEAD = """<!DOCTYPE html>
       <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
       <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
       <a href="index.html#story" data-i18n="nav.story">Історія</a>
+      <a href="fitting.html" data-i18n="nav.fitting">Записатися на примірку</a>
       <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
     </nav>
 
@@ -62,10 +52,6 @@ HEAD = """<!DOCTYPE html>
       <button type="button" class="lang-toggle" id="lang-toggle" aria-label="Змінити мову сайту">
         <span id="lang-toggle-label">EN</span>
       </button>
-      <a class="cart-link" href="cart.html" aria-label="Кошик">
-        {cart_icon}
-        <span class="cart-badge" data-count="0"></span>
-      </a>
       <a class="btn btn-outline-light header-cta" href="index.html#visit" data-i18n-html="header.cta">Візит <span aria-hidden="true">↗</span></a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
@@ -81,6 +67,7 @@ HEAD = """<!DOCTYPE html>
     <a href="index.html#hermose" data-i18n="nav.hermose">HERMOSE</a>
     <a href="catalog.html" data-i18n="nav.catalog">Каталог</a>
     <a href="index.html#story" data-i18n="nav.story">Історія</a>
+    <a href="fitting.html" data-i18n="nav.fitting">Записатися на примірку</a>
     <a href="index.html#visit" data-i18n="nav.visit">Візит</a>
   </nav>
 </div>
@@ -98,9 +85,7 @@ FOOTER = """
       <p class="footer-tagline" data-i18n="footer.tagline">Статус не проголошують. Його носять.</p>
       <div class="footer-meta">
         <span data-i18n="footer.copyright">© 2026 СЕНАТОР</span>
-        <a href="oferta.html" data-i18n="footer.oferta">Оферта</a>
         <a href="privacy.html" data-i18n="footer.privacy">Конфіденційність</a>
-        <a href="returns.html" data-i18n="footer.returns">Повернення</a>
         <a href="https://www.instagram.com/senator_hermose_mikolaiv_/" target="_blank" rel="noopener noreferrer">INSTAGRAM <span aria-hidden="true">↗</span></a>
         <a href="index.html#top" data-i18n-html="footer.toTop">НАГОРУ <span aria-hidden="true">↑</span></a>
       </div>
@@ -109,7 +94,6 @@ FOOTER = """
 </footer>
 
 <script src="js/products-data.js"></script>
-<script src="js/cart.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
@@ -121,15 +105,6 @@ def build_products_data_js():
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("window.SENATOR_PRODUCTS = ")
         json.dump(PRODUCTS, f, ensure_ascii=False, indent=2)
-        f.write(";\n")
-    print("wrote", out_path)
-
-
-def build_cities_data_js():
-    out_path = os.path.join(ROOT, "js", "np-cities-data.js")
-    with open(out_path, "w", encoding="utf-8") as f:
-        f.write("window.SENATOR_NP_CITIES = ")
-        json.dump(CITIES, f, ensure_ascii=False, indent=2)
         f.write(";\n")
     print("wrote", out_path)
 
@@ -147,11 +122,6 @@ def clean_stale_product_pages():
 
 def build_product_pages():
     for p in PRODUCTS:
-        sizes_html = "\n".join(
-            f'            <button type="button" class="size-btn" data-size="{s}" aria-pressed="false">{s}</button>'
-            for s in p["sizes"]
-        )
-
         body = f'''  <section class="product-page">
     <div class="shell">
       <a class="back-link" href="catalog.html"><span aria-hidden="true">←</span> <span data-i18n="shop.backToCatalog">До каталогу</span></a>
@@ -169,22 +139,14 @@ def build_product_pages():
           <h1>{p["name"]["uk"]}</h1>
           <p class="product-detail-price">{p["price"]:,} грн <span style="color: var(--muted); font-weight: 400; font-size: 14px;">(≈ ${p["priceUsd"]})</span></p>
 
-          <p class="option-label" data-i18n="shop.sizeLabel">Розмір</p>
-          <div class="size-selector">
-{sizes_html}
-          </div>
-
-          <p class="option-label" data-i18n="shop.qtyLabel">Кількість</p>
-          <div class="add-row">
-            <div class="qty-stepper">
-              <button type="button" id="qty-minus" aria-label="Зменшити кількість">−</button>
-              <input type="text" id="product-qty" class="qty-input" value="1" inputmode="numeric" readonly>
-              <button type="button" id="qty-plus" aria-label="Збільшити кількість">+</button>
-            </div>
-            <button type="button" class="btn btn-solid" id="add-to-cart" data-product-id="{p["id"]}" data-i18n-html="shop.addToCart">ДОДАТИ В КОШИК <span aria-hidden="true">↗</span></button>
-          </div>
-
           <p class="product-detail-desc">{p["description"]["uk"]}</p>
+
+          <p class="product-availability-note" data-i18n="shop.productNote">Наявність розміру та кількості уточнює менеджер під час дзвінка.</p>
+
+          <div class="product-cta-row">
+            <a class="btn btn-solid" href="fitting.html?product={p["id"]}" data-i18n-html="shop.productCtaFitting">ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-outline" href="consultation.html" data-i18n-html="shop.productCtaConsultation">ЗАМОВИТИ КОНСУЛЬТАЦІЮ ПО ТЕЛЕФОНУ <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -194,7 +156,6 @@ def build_product_pages():
         html = HEAD.format(
             title=f'{p["name"]["uk"]} - СЕНАТОР',
             description=f'{p["name"]["uk"]}, {p["category"]["uk"].lower()} від СЕНАТОР. {p["price"]:,} грн.',
-            cart_icon=CART_ICON_SVG,
         ) + body + FOOTER
 
         out_path = os.path.join(ROOT, f'product-{p["id"]}.html')
@@ -205,7 +166,6 @@ def build_product_pages():
 
 if __name__ == "__main__":
     build_products_data_js()
-    build_cities_data_js()
     clean_stale_product_pages()
     build_product_pages()
-    print("done:", len(PRODUCTS), "products,", len(CITIES), "cities")
+    print("done:", len(PRODUCTS), "products")

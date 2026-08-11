@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n-title="meta.title">Замшеві лофери - СЕНАТОР</title>
-<meta name="description" content="Замшеві лофери, лофери від СЕНАТОР. 12,000 грн." data-i18n-meta="meta.description">
+<title data-i18n-title="meta.title">Заявку прийнято - СЕНАТОР</title>
+<meta name="description" content="Заявку прийнято." data-i18n-meta="meta.description">
+<meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,31 +57,16 @@
 </div>
 
 <main id="main">
-  <section class="product-page">
+
+  <section class="confirm-section">
     <div class="shell">
-      <a class="back-link" href="catalog.html"><span aria-hidden="true">←</span> <span data-i18n="shop.backToCatalog">До каталогу</span></a>
-
-      <div class="product-layout">
-        <div class="product-detail-media">
-          <div class="product-placeholder tone-3">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M18 10h12l3 6h5l-2 26H12L10 16h5l3-6z"/><path d="M18 10a6 6 0 0 0 12 0"/></svg>
-            <span>ФОТО ТОВАРУ</span>
-          </div>
-        </div>
-
-        <div class="product-detail-info">
-          <p class="product-detail-category">Взуття · Лофери</p>
-          <h1>Замшеві лофери</h1>
-          <p class="product-detail-price">12,000 грн <span style="color: var(--muted); font-weight: 400; font-size: 14px;">(≈ $300)</span></p>
-
-          <p class="product-detail-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla.</p>
-
-          <p class="product-availability-note" data-i18n="shop.productNote">Наявність розміру та кількості уточнює менеджер під час дзвінка.</p>
-
-          <div class="product-cta-row">
-            <a class="btn btn-solid" href="fitting.html?product=loafers" data-i18n-html="shop.productCtaFitting">ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden="true">↗</span></a>
-            <a class="btn btn-outline" href="consultation.html" data-i18n-html="shop.productCtaConsultation">ЗАМОВИТИ КОНСУЛЬТАЦІЮ ПО ТЕЛЕФОНУ <span aria-hidden="true">↗</span></a>
-          </div>
+      <div class="confirm-inner reveal">
+        <p class="eyebrow" data-i18n="shop.confirmEyebrow">ЗАЯВКУ ПРИЙНЯТО</p>
+        <h1 data-i18n="shop.confirmTitle">Дякуємо! Ми скоро зв'яжемося.</h1>
+        <p data-i18n="shop.confirmBody">Менеджер СЕНАТОРА зателефонує вам найближчим часом, щоб узгодити деталі.</p>
+        <div class="confirm-actions">
+          <a class="btn btn-solid" href="index.html" data-i18n="shop.confirmBackHome">НА ГОЛОВНУ</a>
+          <a class="btn btn-link" href="catalog.html" data-i18n-html="shop.confirmToCatalog">ДО КАТАЛОГУ <span aria-hidden="true">↗</span></a>
         </div>
       </div>
     </div>
@@ -103,7 +89,6 @@
   </div>
 </footer>
 
-<script src="js/products-data.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
