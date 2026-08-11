@@ -501,7 +501,9 @@
   var splitObserver = null;
 
   function initSplitReveal(reducedMotion) {
-    var headings = document.querySelectorAll("main h2");
+    var headings = Array.prototype.filter.call(document.querySelectorAll("main h2"), function (el) {
+      return !el.closest(".legal-page");
+    });
     if (!headings.length) return;
 
     headings.forEach(function (el) {
