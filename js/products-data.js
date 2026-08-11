@@ -150,35 +150,6 @@ window.SENATOR_PRODUCTS = [
     }
   },
   {
-    "id": "wool-coat",
-    "group": {
-      "uk": "Одяг",
-      "en": "Clothing"
-    },
-    "category": {
-      "uk": "Пальто",
-      "en": "Coats"
-    },
-    "name": {
-      "uk": "Вовняне пальто",
-      "en": "Wool Coat"
-    },
-    "price": 12000,
-    "priceUsd": 300,
-    "sizes": [
-      "48",
-      "50",
-      "52",
-      "54",
-      "56"
-    ],
-    "tone": "tone-3",
-    "description": {
-      "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt.",
-      "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt."
-    }
-  },
-  {
     "id": "white-shirt",
     "group": {
       "uk": "Одяг",
@@ -205,35 +176,6 @@ window.SENATOR_PRODUCTS = [
     "description": {
       "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.",
       "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis porttitor volutpat."
-    }
-  },
-  {
-    "id": "classic-vest",
-    "group": {
-      "uk": "Одяг",
-      "en": "Clothing"
-    },
-    "category": {
-      "uk": "Жилети",
-      "en": "Waistcoats"
-    },
-    "name": {
-      "uk": "Класичний жилет",
-      "en": "Classic Waistcoat"
-    },
-    "price": 12000,
-    "priceUsd": 300,
-    "sizes": [
-      "46",
-      "48",
-      "50",
-      "52",
-      "54"
-    ],
-    "tone": "tone-1",
-    "description": {
-      "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.",
-      "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem."
     }
   },
   {
@@ -312,91 +254,6 @@ window.SENATOR_PRODUCTS = [
     "description": {
       "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes.",
       "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Cum sociis natoque penatibus et magnis dis parturient montes."
-    }
-  },
-  {
-    "id": "cufflinks",
-    "group": {
-      "uk": "Аксесуари",
-      "en": "Accessories"
-    },
-    "category": {
-      "uk": "Запонки",
-      "en": "Cufflinks"
-    },
-    "name": {
-      "uk": "Срібні запонки",
-      "en": "Silver Cufflinks"
-    },
-    "price": 12000,
-    "priceUsd": 300,
-    "sizes": [
-      "Один розмір"
-    ],
-    "tone": "tone-2",
-    "description": {
-      "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Maecenas faucibus mollis interdum.",
-      "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porta sem malesuada magna mollis euismod. Maecenas faucibus mollis interdum."
-    }
-  },
-  {
-    "id": "chelsea-boots",
-    "group": {
-      "uk": "Взуття",
-      "en": "Footwear"
-    },
-    "category": {
-      "uk": "Челсі",
-      "en": "Chelsea Boots"
-    },
-    "name": {
-      "uk": "Черевики челсі",
-      "en": "Chelsea Boots"
-    },
-    "price": 12000,
-    "priceUsd": 300,
-    "sizes": [
-      "40",
-      "41",
-      "42",
-      "43",
-      "44",
-      "45"
-    ],
-    "tone": "tone-1",
-    "description": {
-      "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.",
-      "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus."
-    }
-  },
-  {
-    "id": "loafers",
-    "group": {
-      "uk": "Взуття",
-      "en": "Footwear"
-    },
-    "category": {
-      "uk": "Лофери",
-      "en": "Loafers"
-    },
-    "name": {
-      "uk": "Замшеві лофери",
-      "en": "Suede Loafers"
-    },
-    "price": 12000,
-    "priceUsd": 300,
-    "sizes": [
-      "40",
-      "41",
-      "42",
-      "43",
-      "44",
-      "45"
-    ],
-    "tone": "tone-3",
-    "description": {
-      "uk": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla.",
-      "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Donec ullamcorper nulla non metus auctor fringilla."
     }
   }
 ];

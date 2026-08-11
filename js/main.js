@@ -53,6 +53,7 @@
         formConsent: "Погоджуюсь з <a href=\"privacy.html\" target=\"_blank\">політикою конфіденційності</a>",
         fittingSubmitCta: "ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden=\"true\">↗</span>",
         consultationSubmitCta: "ЗАМОВИТИ КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>",
+        callDirectly: "Або зателефонуйте нам напряму: <a href=\"tel:+380631840915\">+380 63 184 09 15</a> (основний) · <a href=\"tel:+380933835654\">+380 93 383 56 54</a> (додатковий)",
         confirmEyebrow: "ЗАЯВКУ ПРИЙНЯТО",
         confirmTitle: "Дякуємо! Ми скоро зв'яжемося.",
         confirmBody: "Менеджер СЕНАТОРА зателефонує вам найближчим часом, щоб узгодити деталі.",
@@ -184,6 +185,7 @@
         formConsent: "I agree to the <a href=\"privacy.html\" target=\"_blank\">privacy policy</a>",
         fittingSubmitCta: "BOOK A FITTING <span aria-hidden=\"true\">↗</span>",
         consultationSubmitCta: "REQUEST A CALL BACK <span aria-hidden=\"true\">↗</span>",
+        callDirectly: "Or call us directly: <a href=\"tel:+380631840915\">+380 63 184 09 15</a> (main) · <a href=\"tel:+380933835654\">+380 93 383 56 54</a> (alternative)",
         confirmEyebrow: "REQUEST RECEIVED",
         confirmTitle: "Thank you! We'll be in touch soon.",
         confirmBody: "A SENATOR manager will call you shortly to arrange the details.",
@@ -344,11 +346,20 @@
     }
   }
 
-  function initHeaderScroll() {
+  function initHeaderScroll(reducedMotion) {
     var header = document.getElementById("site-header");
     if (!header) return;
+    var lastScroll = window.scrollY;
     var onScroll = function () {
-      header.classList.toggle("is-scrolled", window.scrollY > 40);
+      var current = window.scrollY;
+      header.classList.toggle("is-scrolled", current > 40);
+      if (reducedMotion) return;
+      if (current > lastScroll && current > 160) {
+        header.classList.add("is-hidden");
+      } else {
+        header.classList.remove("is-hidden");
+      }
+      lastScroll = current;
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -416,6 +427,139 @@
     });
   }
 
+  function initHeroParallax(reducedMotion) {
+    var hero = document.querySelector(".hero");
+    var media = document.querySelector(".hero-media");
+    if (!hero || !media || reducedMotion) return;
+
+    var ready = false;
+    media.addEventListener("transitionend", function (e) {
+      if (e.propertyName === "transform") {
+        media.classList.add("is-parallax-ready");
+        ready = true;
+      }
+    });
+
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      if (!ready) return;
+      var rect = hero.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+      var offset = Math.max(-40, Math.min(40, window.scrollY * 0.12));
+      media.style.transform = "scale(1.06) translateY(" + Math.round(offset) + "px)";
+    };
+
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
+  }
+
+  function splitIntoWordNodes(parent) {
+    var result = [];
+    parent.childNodes.forEach(function (child) {
+      if (child.nodeType === Node.TEXT_NODE) {
+        child.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) {
+            result.push(document.createTextNode(part));
+            return;
+          }
+          var outer = document.createElement("span");
+          outer.className = "split-word";
+          var inner = document.createElement("span");
+          inner.className = "split-word__inner";
+          inner.textContent = part;
+          outer.appendChild(inner);
+          result.push(outer);
+        });
+      } else if (child.nodeType === Node.ELEMENT_NODE) {
+        if (child.tagName === "BR") {
+          result.push(document.createElement("br"));
+        } else {
+          var clone = document.createElement(child.tagName);
+          for (var i = 0; i < child.attributes.length; i++) {
+            clone.setAttribute(child.attributes[i].name, child.attributes[i].value);
+          }
+          splitIntoWordNodes(child).forEach(function (n) {
+            clone.appendChild(n);
+          });
+          result.push(clone);
+        }
+      }
+    });
+    return result;
+  }
+
+  var splitObserver = null;
+
+  function initSplitReveal(reducedMotion) {
+    var headings = document.querySelectorAll("main h2");
+    if (!headings.length) return;
+
+    headings.forEach(function (el) {
+      var nodes = splitIntoWordNodes(el);
+      el.innerHTML = "";
+      nodes.forEach(function (n) {
+        el.appendChild(n);
+      });
+      el.classList.add("split-text");
+
+      el.querySelectorAll(".split-word__inner").forEach(function (word, i) {
+        word.style.transitionDelay = i * 40 + "ms";
+      });
+    });
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      headings.forEach(function (el) {
+        el.classList.add("is-visible");
+      });
+      return;
+    }
+
+    if (splitObserver) splitObserver.disconnect();
+    splitObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            splitObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    headings.forEach(function (el) {
+      splitObserver.observe(el);
+    });
+  }
+
+  function initMagnetic(reducedMotion) {
+    if (reducedMotion || !window.matchMedia("(hover: hover)").matches) return;
+
+    document.querySelectorAll(".btn-solid, .btn-outline, .btn-outline-light").forEach(function (el) {
+      el.addEventListener("mousemove", function (e) {
+        var rect = el.getBoundingClientRect();
+        var relX = e.clientX - rect.left - rect.width / 2;
+        var relY = e.clientY - rect.top - rect.height / 2;
+        el.style.transition = "transform 0.1s linear";
+        el.style.transform = "translate(" + (relX * 0.25).toFixed(1) + "px, " + (relY * 0.25).toFixed(1) + "px)";
+      });
+      el.addEventListener("mouseleave", function () {
+        el.style.transition = "transform 0.4s var(--ease)";
+        el.style.transform = "translate(0, 0)";
+      });
+    });
+  }
+
   function initAmbientVideo(reducedMotion) {
     var videos = document.querySelectorAll(".media-video");
     if (!videos.length || reducedMotion) return;
@@ -450,9 +594,16 @@
     if (reducedMotion) document.documentElement.classList.add("js-no-motion");
 
     initLanguage();
-    initHeaderScroll();
+    initHeaderScroll(reducedMotion);
     initMobileNav();
     initReveal(reducedMotion);
+    initHeroParallax(reducedMotion);
+    initSplitReveal(reducedMotion);
+    initMagnetic(reducedMotion);
     initAmbientVideo(reducedMotion);
+
+    document.addEventListener("senator:langchange", function () {
+      initSplitReveal(reducedMotion);
+    });
   });
 })();

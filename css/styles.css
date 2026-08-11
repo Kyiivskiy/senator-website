@@ -262,7 +262,7 @@ blockquote {
   padding: 26px 0;
   background: transparent;
   border-bottom: 1px solid transparent;
-  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.4s var(--ease);
+  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.4s var(--ease), transform 0.4s var(--ease);
 }
 
 .site-header.is-scrolled {
@@ -271,6 +271,8 @@ blockquote {
   border-bottom-color: var(--line-dark);
   padding: 16px 0;
 }
+
+.site-header.is-hidden { transform: translateY(-100%); }
 
 .header-inner {
   display: flex;
@@ -428,7 +430,7 @@ blockquote {
   background-position: center, right top;
   background-repeat: no-repeat, no-repeat;
   filter: brightness(0.88);
-  transform: scale(1.06);
+  transform: scale(1.12);
   transition: transform 1.6s var(--ease);
 }
 
@@ -449,7 +451,9 @@ blockquote {
   background: linear-gradient(90deg, rgba(11, 10, 9, 0.92) 0%, rgba(11, 10, 9, 0.68) 32%, rgba(11, 10, 9, 0.18) 60%, rgba(11, 10, 9, 0.05) 100%);
 }
 
-.hero.is-revealed .hero-media { transform: scale(1); }
+.hero.is-revealed .hero-media { transform: scale(1.06); }
+
+.hero-media.is-parallax-ready { transition: none; }
 
 .hero-inner {
   position: relative;
@@ -738,6 +742,7 @@ blockquote {
 }
 
 .look-card {
+  display: block;
   position: relative;
   aspect-ratio: 3 / 4;
   overflow: hidden;
@@ -997,6 +1002,23 @@ blockquote {
 }
 
 .reveal.is-visible { opacity: 1; transform: none; }
+
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  line-height: inherit;
+}
+
+.split-word__inner {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.7s var(--ease);
+}
+
+.split-text.is-visible .split-word__inner { transform: translateY(0); }
+
+.js-no-motion .split-word__inner { transform: none !important; transition: none !important; }
 
 .js-no-motion .reveal,
 .js-no-motion .hero-inner .eyebrow,
@@ -1451,6 +1473,14 @@ h1.page-title {
   accent-color: var(--cognac);
   cursor: pointer;
 }
+
+.phone-note {
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+.phone-note a { color: var(--ink); border-bottom: 1px solid var(--line-light); }
+.phone-note a:hover { border-color: var(--ink); }
 
 /* ==========================================================================
    Order confirmation
