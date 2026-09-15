@@ -276,12 +276,20 @@ h3 {
 .top-bar-item svg { flex-shrink: 0; }
 a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 
+
 .top-bar-social {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.top-bar-social a { color: var(--ink); display: inline-flex; transition: color 0.25s var(--ease); }
+/* padding, not size: keeps the 18px mark but gives it a real tap target */
+.top-bar-social a {
+  display: inline-flex;
+  padding: 6px;
+  margin: -6px;
+  color: var(--ink);
+  transition: color 0.25s var(--ease);
+}
 .top-bar-social a:hover { color: var(--ink-soft); }
 
 /* ==========================================================================
@@ -1082,7 +1090,6 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   .top-bar-inner { gap: 12px; padding: 4px 0; }
   .top-bar-contacts { gap: 14px; flex-wrap: nowrap; }
   .top-bar-item { gap: 6px; padding: 6px 0; white-space: nowrap; }
-  .top-bar-social a { padding: 6px; margin: -6px; }
 
   .wordmark-sub { font-size: 9px; letter-spacing: 0.18em; }
 
