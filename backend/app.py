@@ -20,9 +20,11 @@ Run locally:
 """
 
 import os
+import time
 import urllib.request
 import urllib.parse
 import json
+from collections import defaultdict
 
 from flask import Flask, request, jsonify
 
@@ -38,6 +40,29 @@ BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
 ALLOWED_ORIGIN = os.environ.get("ALLOWED_ORIGIN", "*")
 ORDER_API_KEY = os.environ.get("ORDER_API_KEY", "")
+
+# In-memory per-IP rate limit. Resets on every deploy/restart and doesn't
+# sync across instances, but this service runs as a single free-tier
+# Render instance, so that's not a real gap - it only needs to blunt
+# casual spam/retries, not survive a determined attacker.
+RATE_LIMIT_MAX = 5
+RATE_LIMIT_WINDOW_SECONDS = 600
+_request_log = defaultdict(list)
+
+
+def is_rate_limited(ip):
+    now = time.time()
+    recent = [t for t in _request_log[ip] if now - t < RATE_LIMIT_WINDOW_SECONDS]
+    recent.append(now)
+    _request_log[ip] = recent
+    return len(recent) > RATE_LIMIT_MAX
+
+
+def client_ip():
+    forwarded = request.headers.get("X-Forwarded-For", "")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.remote_addr or "unknown"
 
 
 def send_telegram_message(text):
@@ -78,6 +103,9 @@ def format_lead_message(lead):
         lines.append(f"\U0001F464 Имя: {name}")
         lines.append(f"\U0001F4DE Телефон: {phone}")
         lines.append(f"\U0001F552 Удобное время звонка: {preferred_time}")
+        product = lead.get("product", "").strip()
+        if product:
+            lines.append(f"\U0001F454 Интересует: {escape(product)}")
         return "\n".join(lines)
 
     raise ValueError(f"unknown lead type: {lead_type!r}")
@@ -94,7 +122,20 @@ def escape(value):
 
 @app.after_request
 def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = ALLOWED_ORIGIN
+    # ALLOWED_ORIGIN may list several origins, comma-separated, so the live site
+    # and a local dev server can both be permitted without opening it to everyone.
+    allowed = [o.strip() for o in ALLOWED_ORIGIN.split(",") if o.strip()]
+    origin = request.headers.get("Origin", "")
+
+    if "*" in allowed:
+        allow = "*"
+    elif origin in allowed:
+        allow = origin
+    else:
+        allow = allowed[0] if allowed else "*"
+
+    response.headers["Access-Control-Allow-Origin"] = allow
+    response.headers["Vary"] = "Origin"
     response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, X-API-Key"
     return response
@@ -108,9 +149,18 @@ def notify_lead():
     if ORDER_API_KEY and request.headers.get("X-API-Key") != ORDER_API_KEY:
         return jsonify({"ok": False, "error": "unauthorized"}), 401
 
+    if is_rate_limited(client_ip()):
+        return jsonify({"ok": False, "error": "too many requests"}), 429
+
     lead = request.get_json(silent=True)
     if not lead:
         return jsonify({"ok": False, "error": "invalid or missing JSON body"}), 400
+
+    # Honeypot: a form field real visitors never see or fill in. If it's
+    # filled, this is a bot - pretend success so it doesn't learn to leave
+    # the field alone, but skip the Telegram message entirely.
+    if lead.get("website"):
+        return jsonify({"ok": True})
 
     try:
         message = format_lead_message(lead)

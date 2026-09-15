@@ -12,14 +12,10 @@
       brand: { name: "СЕНАТОР" },
       nav: {
         salon: "Про салон",
-        hermose: "HERMOSE",
-        looks: "Образи",
-        story: "Історія",
-        visit: "Візит",
         catalog: "Каталог",
-        fitting: "Записатися на примірку"
+        contacts: "Контакти"
       },
-      header: { cta: "Візит <span aria-hidden=\"true\">↗</span>" },
+      header: { cta: "ЗАМОВИТИ ОНЛАЙН-КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>" },
       shop: {
         catalogEyebrow: "КАТАЛОГ СЕНАТОРА",
         catalogTitle: "Всі образи в одному місці.",
@@ -32,26 +28,18 @@
         noResults: "У цій категорії поки немає товарів.",
         backToCatalog: "До каталогу",
         productNote: "Наявність розміру та кількості уточнює менеджер під час дзвінка.",
-        productCtaFitting: "ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden=\"true\">↗</span>",
-        productCtaConsultation: "ЗАМОВИТИ КОНСУЛЬТАЦІЮ ПО ТЕЛЕФОНУ <span aria-hidden=\"true\">↗</span>",
-        fittingEyebrow: "ЗАПИС",
-        fittingTitle: "Записатися на примірку",
-        fittingLead: "Залиште контакти - менеджер зателефонує, щоб узгодити зручний час і розповісти про товар.",
+        productCtaConsultation: "ЗАМОВИТИ ОНЛАЙН-КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>",
         consultationEyebrow: "КОНСУЛЬТАЦІЯ",
         consultationTitle: "Замовити консультацію по телефону",
         consultationLead: "Залиште номер - менеджер зателефонує і розповість про наявність, розміри та ціни.",
         checkoutContactLegend: "Контактні дані",
         formName: "Ім'я та прізвище",
         formPhone: "Телефон",
-        formPreferredTime: "Зручний час",
-        formPreferredTimePlaceholder: "Наприклад: сьогодні після 18:00",
         formCallTime: "Зручний час для дзвінка",
-        formCallTimePlaceholder: "Наприклад: будь-коли, або після 17:00",
+        formCallTimePlaceholder: "Наприклад: з 10:00 до 18:30",
         formProduct: "Товар, що цікавить",
-        formProductNone: "Ще не обрав(ла) / не важливо",
         formErrorRequired: "Заповніть це поле",
         formConsent: "Погоджуюсь з <a href=\"privacy.html\" target=\"_blank\">політикою конфіденційності</a>",
-        fittingSubmitCta: "ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden=\"true\">↗</span>",
         consultationSubmitCta: "ЗАМОВИТИ КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>",
         callDirectly: "Або зателефонуйте нам напряму: <a href=\"tel:+380631840915\">+380 63 184 09 15</a> (основний) · <a href=\"tel:+380933835654\">+380 93 383 56 54</a> (додатковий)",
         confirmEyebrow: "ЗАЯВКУ ПРИЙНЯТО",
@@ -65,31 +53,22 @@
         titleLine1: "Характер",
         titleLine2: "має форму.",
         lead: "Костюм не створює статус. Він точно показує, ким ви є.",
-        ctaPrimary: "ЗАПИСАТИСЯ НА ПРИМІРКУ <span aria-hidden=\"true\">↗</span>",
+        ctaPrimary: "ЗАМОВИТИ ОНЛАЙН-КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>",
         ctaSecondary: "ПЕРЕГЛЯНУТИ ОБРАЗИ <span aria-hidden=\"true\">↓</span>"
       },
       stats: {
         years: { unit: "років", label: "характеру та досвіду" },
-        sizes: { label: "широкий розмірний ряд" },
-        salon: { value: "01 салон", label: "у серці Миколаєва" }
+        sizes: { label: "широкий розмірний ряд" }
       },
       salon: {
         eyebrow: "ЛАСКАВО ПРОСИМО ДО СЕНАТОРА",
         title: "Класика, що стає<br>особистою.",
         body: "Тут не продають перший костюм, який підійшов за розміром. Тут слухають, радять і допомагають знайти образ, що відповідає вашій події, характеру та намірам.",
-        quote: "Статус не означає зачинені двері. У СЕНАТОРА кожного зустрічають як гостя.",
-        link: "ЯК ПРОХОДИТЬ ЗУСТРІЧ <span aria-hidden=\"true\">↗</span>",
         imageAlt: "Чоловік поправляє манжет піджака в інтер'єрі салону"
-      },
-      manifesto: {
-        title: "Ви ще не сказали<br>жодного слова.",
-        accent: "Костюм уже почав розмову.",
-        body: "Весілля. Випускний. Перша велика угода. Офіційна зустріч. Або звичайний день, у якому ви обираєте виглядати відповідно до власних стандартів."
       },
       hermose: {
         body: "Офіційний представник в Україні. Турецький бренд чоловічого одягу, що поєднує класичну школу, сучасний крій, комфорт і виразні матеріали. У салоні СЕНАТОР представлені костюми, піджаки, сорочки та аксесуари HERMOSE для ділових і вечірніх образів.",
         fact: "ВИРОБНИЦТВО · ТУРЕЧЧИНА",
-        cta: "ДІЗНАТИСЯ ПРО БРЕНД <span aria-hidden=\"true\">↗</span>",
         imageAlt: "Два чоловіки в костюмах HERMOSE, світлому та темно-синьому"
       },
       looks: {
@@ -106,21 +85,12 @@
         step2: { title: "Вибір", body: "Пропонуємо декілька точних варіантів замість десятків випадкових." },
         step3: { title: "Примірка", body: "Оцінюємо посадку, пропорції та кожну деталь майбутнього образу." }
       },
-      story: {
-        title: "17 років характеру.",
-        lead: "СЕНАТОР почався з кількох костюмів і маленької торгової точки на ринку. Ринок став першою адресою. Але ніколи не був межею.",
-        body: "Наталія побудувала справу, яка продовжувала зростати незалежно від обставин. Поруч із нею - Людмила, подруга та незмінна менеджерка магазину, яка пройшла разом із СЕНАТОРОМ майже весь його шлях.",
-        strongLine: "Кризи. Переїзди. COVID. Війна.",
-        final: "Сьогодні це великий бутик у самому серці Миколаєва та офіційний представник HERMOSE в Україні.",
-        link: "ЗАВІТАТИ ДО САЛОНУ <span aria-hidden=\"true\">↗</span>",
-        imageAlt: "Крупний план рук, що поправляють білу манжету поверх темного піджака"
-      },
       visit: {
         eyebrow: "ВІЗИТ",
         title: "Ваш костюм чекає на<br>особисте знайомство.",
         address: "вул. Велика Морська, 69а, Миколаїв",
-        hours: "Щодня · 10:00-19:00",
-        ctaPrimary: "ПРОКЛАСТИ МАРШРУТ <span aria-hidden=\"true\">↗</span>",
+        hours: "Вівторок – неділя · 10:00-18:30 · понеділок вихідний",
+        ctaPrimary: "ЗАМОВИТИ ОНЛАЙН-КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>",
         ctaSecondary: "НАПИСАТИ В INSTAGRAM <span aria-hidden=\"true\">↗</span>"
       },
       footer: {
@@ -132,8 +102,7 @@
       legal: {
         privacyEyebrow: "ПРАВОВА ІНФОРМАЦІЯ",
         privacyTitle: "Політика конфіденційності",
-        enNotice: "Цей документ регулюється законодавством України і надається лише українською мовою. Щоб отримати роз'яснення англійською, зв'яжіться з нами через Instagram.",
-        draftNotice: "Це чернетка, а не юридична консультація. Перед публікацією реквізити [У ДУЖКАХ] потрібно замінити на реальні, а весь текст варто показати бухгалтеру або юристу."
+        enNotice: "Цей документ регулюється законодавством України і надається лише українською мовою. Щоб отримати роз'яснення англійською, зв'яжіться з нами через Instagram."
       }
     },
     en: {
@@ -144,14 +113,10 @@
       brand: { name: "SENATOR" },
       nav: {
         salon: "About",
-        hermose: "HERMOSE",
-        looks: "Looks",
-        story: "Story",
-        visit: "Visit",
         catalog: "Catalog",
-        fitting: "Book a fitting"
+        contacts: "Contacts"
       },
-      header: { cta: "Visit <span aria-hidden=\"true\">↗</span>" },
+      header: { cta: "REQUEST AN ONLINE CONSULTATION <span aria-hidden=\"true\">↗</span>" },
       shop: {
         catalogEyebrow: "SENATOR CATALOG",
         catalogTitle: "All the looks in one place.",
@@ -164,26 +129,18 @@
         noResults: "No products in this category yet.",
         backToCatalog: "Back to catalog",
         productNote: "The manager will confirm size and availability by phone.",
-        productCtaFitting: "BOOK A FITTING <span aria-hidden=\"true\">↗</span>",
-        productCtaConsultation: "REQUEST A CALL BACK <span aria-hidden=\"true\">↗</span>",
-        fittingEyebrow: "BOOKING",
-        fittingTitle: "Book a fitting",
-        fittingLead: "Leave your details and the manager will call to arrange a convenient time and tell you about the product.",
+        productCtaConsultation: "REQUEST AN ONLINE CONSULTATION <span aria-hidden=\"true\">↗</span>",
         consultationEyebrow: "CONSULTATION",
         consultationTitle: "Request a phone consultation",
         consultationLead: "Leave your number and the manager will call to tell you about availability, sizes, and prices.",
         checkoutContactLegend: "Contact details",
         formName: "Full name",
         formPhone: "Phone",
-        formPreferredTime: "Convenient time",
-        formPreferredTimePlaceholder: "E.g. today after 6pm",
         formCallTime: "Convenient time to call",
-        formCallTimePlaceholder: "E.g. anytime, or after 5pm",
+        formCallTimePlaceholder: "E.g. between 10:00 and 18:30",
         formProduct: "Product of interest",
-        formProductNone: "Not decided yet / doesn't matter",
         formErrorRequired: "Please fill in this field",
         formConsent: "I agree to the <a href=\"privacy.html\" target=\"_blank\">privacy policy</a>",
-        fittingSubmitCta: "BOOK A FITTING <span aria-hidden=\"true\">↗</span>",
         consultationSubmitCta: "REQUEST A CALL BACK <span aria-hidden=\"true\">↗</span>",
         callDirectly: "Or call us directly: <a href=\"tel:+380631840915\">+380 63 184 09 15</a> (main) · <a href=\"tel:+380933835654\">+380 93 383 56 54</a> (alternative)",
         confirmEyebrow: "REQUEST RECEIVED",
@@ -197,31 +154,22 @@
         titleLine1: "Character",
         titleLine2: "has a form.",
         lead: "A suit does not create status. It reveals who you are.",
-        ctaPrimary: "BOOK A FITTING <span aria-hidden=\"true\">↗</span>",
+        ctaPrimary: "REQUEST AN ONLINE CONSULTATION <span aria-hidden=\"true\">↗</span>",
         ctaSecondary: "EXPLORE THE LOOKS <span aria-hidden=\"true\">↓</span>"
       },
       stats: {
         years: { unit: "years", label: "of character and experience" },
-        sizes: { label: "a wide size range" },
-        salon: { value: "01 salon", label: "in the heart of Mykolaiv" }
+        sizes: { label: "a wide size range" }
       },
       salon: {
         eyebrow: "WELCOME TO SENATOR",
         title: "Classic style,<br>made personal.",
         body: "Here, no one sells you the first suit that happens to fit. Here, people listen, advise, and help you find a look that matches your occasion, character, and intent.",
-        quote: "Status does not mean closed doors. At SENATOR, everyone is welcomed as a guest.",
-        link: "HOW A VISIT UNFOLDS <span aria-hidden=\"true\">↗</span>",
         imageAlt: "A man adjusting a jacket cuff inside the salon interior"
-      },
-      manifesto: {
-        title: "You have not said<br>a single word.",
-        accent: "Your suit has already begun the conversation.",
-        body: "A wedding. A graduation. A major deal. An official meeting. Or an ordinary day on which you choose to look the way your own standards demand."
       },
       hermose: {
         body: "Official representative in Ukraine. A Turkish menswear brand that combines classic tailoring, a modern cut, comfort, and expressive materials. SENATOR carries HERMOSE suits, blazers, shirts, and accessories for both business and evening looks.",
         fact: "MANUFACTURED · TURKEY",
-        cta: "DISCOVER THE BRAND <span aria-hidden=\"true\">↗</span>",
         imageAlt: "Two men wearing HERMOSE suits, one light and one dark navy"
       },
       looks: {
@@ -238,21 +186,12 @@
         step2: { title: "Selection", body: "We offer a few precise options instead of dozens of random ones." },
         step3: { title: "Fitting", body: "We assess the fit, proportions, and every detail of the future look." }
       },
-      story: {
-        title: "17 years of character.",
-        lead: "SENATOR began with a handful of suits and a small stall at the market. The market became the first address. But it was never a limit.",
-        body: "Natalia built a business that kept growing regardless of circumstances. Beside her - Liudmyla, a friend and the shop's steady manager, who has walked almost the entire path together with SENATOR.",
-        strongLine: "Crises. Relocations. COVID. War.",
-        final: "Today it is a large boutique in the very heart of Mykolaiv and the official representative of HERMOSE in Ukraine.",
-        link: "VISIT THE SALON <span aria-hidden=\"true\">↗</span>",
-        imageAlt: "Close-up of hands adjusting a white cuff over a dark jacket"
-      },
       visit: {
         eyebrow: "VISIT",
         title: "Your suit is waiting for<br>a personal introduction.",
         address: "69a Velyka Morska Street, Mykolaiv",
-        hours: "Daily · 10:00-19:00",
-        ctaPrimary: "GET DIRECTIONS <span aria-hidden=\"true\">↗</span>",
+        hours: "Tuesday – Sunday · 10:00-18:30 · closed on Monday",
+        ctaPrimary: "REQUEST AN ONLINE CONSULTATION <span aria-hidden=\"true\">↗</span>",
         ctaSecondary: "MESSAGE ON INSTAGRAM <span aria-hidden=\"true\">↗</span>"
       },
       footer: {
@@ -264,8 +203,7 @@
       legal: {
         privacyEyebrow: "LEGAL INFORMATION",
         privacyTitle: "Privacy Policy",
-        enNotice: "This document is governed by Ukrainian law and provided in Ukrainian only. For an explanation in English, please contact us via Instagram.",
-        draftNotice: "This is a draft, not legal advice. Before publishing, replace the [BRACKETED] placeholders with real business details, and have the full text reviewed by an accountant or lawyer."
+        enNotice: "This document is governed by Ukrainian law and provided in Ukrainian only. For an explanation in English, please contact us via Instagram."
       }
     }
   };
@@ -347,22 +285,77 @@
   }
 
   function initHeaderScroll(reducedMotion) {
+    var group = document.getElementById("header-group");
     var header = document.getElementById("site-header");
-    if (!header) return;
+    if (!group || !header) return;
     var lastScroll = window.scrollY;
     var onScroll = function () {
       var current = window.scrollY;
       header.classList.toggle("is-scrolled", current > 40);
       if (reducedMotion) return;
       if (current > lastScroll && current > 160) {
-        header.classList.add("is-hidden");
+        group.classList.add("is-hidden");
       } else {
-        header.classList.remove("is-hidden");
+        group.classList.remove("is-hidden");
       }
       lastScroll = current;
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* The header sits in the flow above the hero, so a 100svh hero would push the
+     first screen past the fold. Publish its height and let CSS subtract it. */
+  function initHeaderHeight() {
+    var group = document.getElementById("header-group");
+    if (!group) return;
+
+    var publish = function () {
+      var header = document.getElementById("site-header");
+      var scrolled = header && header.classList.contains("is-scrolled");
+      if (scrolled) return; // measure only in the resting state
+      document.documentElement.style.setProperty(
+        "--header-h", Math.round(group.getBoundingClientRect().height) + "px"
+      );
+    };
+
+    publish();
+    window.addEventListener("resize", publish, { passive: true });
+  }
+
+  function initProductGallery() {
+    var gallery = document.querySelector("[data-gallery]");
+    if (!gallery) return;
+
+    var shots = gallery.querySelectorAll(".product-gallery-stage img");
+    var dots = gallery.querySelectorAll(".product-gallery-dots button");
+    if (shots.length < 2) return;
+
+    var current = 0;
+
+    var show = function (index) {
+      current = (index + shots.length) % shots.length;
+      shots.forEach(function (img, i) {
+        img.classList.toggle("is-active", i === current);
+      });
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle("is-active", i === current);
+      });
+    };
+
+    var prev = gallery.querySelector(".gallery-prev");
+    var next = gallery.querySelector(".gallery-next");
+    if (prev) prev.addEventListener("click", function () { show(current - 1); });
+    if (next) next.addEventListener("click", function () { show(current + 1); });
+
+    dots.forEach(function (dot, i) {
+      dot.addEventListener("click", function () { show(i); });
+    });
+
+    gallery.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") show(current - 1);
+      if (e.key === "ArrowRight") show(current + 1);
+    });
   }
 
   function initMobileNav() {
@@ -562,47 +555,20 @@
     });
   }
 
-  function initAmbientVideo(reducedMotion) {
-    var videos = document.querySelectorAll(".media-video");
-    if (!videos.length || reducedMotion) return;
-
-    if (!("IntersectionObserver" in window)) {
-      videos.forEach(function (video) {
-        video.play().catch(function () {});
-      });
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.play().catch(function () {});
-          } else {
-            entry.target.pause();
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-    videos.forEach(function (video) {
-      observer.observe(video);
-    });
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.documentElement.classList.add("js-ready");
     if (reducedMotion) document.documentElement.classList.add("js-no-motion");
 
     initLanguage();
+    initHeaderHeight();
     initHeaderScroll(reducedMotion);
+    initProductGallery();
     initMobileNav();
     initReveal(reducedMotion);
     initHeroParallax(reducedMotion);
     initSplitReveal(reducedMotion);
     initMagnetic(reducedMotion);
-    initAmbientVideo(reducedMotion);
 
     document.addEventListener("senator:langchange", function () {
       initSplitReveal(reducedMotion);

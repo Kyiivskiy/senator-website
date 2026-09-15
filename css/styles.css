@@ -7,9 +7,15 @@
   --ink-soft: #14120f;
   --paper: #e8e0d3;
   --paper-light: #f2ede5;
-  --cognac: #9a5b35;
-  --brass: #b59668;
+  --cognac: #c48a2e;
+  --brass: #d9a544;
   --muted: #a39b91;
+
+  /* Accent and muted text sitting on the light (paper) surfaces. The bright
+     brass/cognac only clears WCAG on the dark sections — on cream it drops to
+     ~1.7:1, so light sections use these darker equivalents instead. */
+  --accent-on-light: #8a5512;
+  --muted-on-light: #645c52;
   --line-dark: rgba(255, 255, 255, 0.18);
   --line-light: rgba(11, 10, 9, 0.2);
 
@@ -18,7 +24,12 @@
 
   --shell-width: min(100% - 96px, 1440px);
   --section-pad-y: clamp(90px, 11vw, 180px);
+  --section-pad-y-sm: clamp(56px, 6.5vw, 104px);
+  --section-pad-y-xs: clamp(32px, 3.5vw, 56px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Spacing: every margin/padding/gap in this file sits on an 8px scale,
+     with a 4px half-step for micro gaps (icons, underlines). */
 }
 
 @media (max-width: 1199px) {
@@ -73,6 +84,8 @@ ul { list-style: none; margin: 0; padding: 0; }
   border: 0;
 }
 
+.honeypot-field { display: none; }
+
 .skip-link {
   position: absolute;
   top: -60px;
@@ -120,8 +133,14 @@ body::before {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--brass);
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
+
+/* the same eyebrow on cream backgrounds — brass is unreadable there */
+.salon .eyebrow,
+.looks .eyebrow,
+.product-page .eyebrow,
+.catalog-section .eyebrow { color: var(--accent-on-light); }
 
 h2 {
   font-family: var(--font-serif);
@@ -145,48 +164,6 @@ h3 {
   max-width: 46ch;
 }
 
-blockquote {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 20px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-  max-width: 40ch;
-  padding-left: 20px;
-  border-left: 1px solid var(--line-light);
-  margin: 32px 0;
-}
-
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  position: relative;
-  padding-bottom: 4px;
-}
-
-.text-link::after {
-  content: "";
-  position: absolute;
-  left: 0; bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform-origin: left;
-  transform: scaleX(0.35);
-  transition: transform 0.45s var(--ease);
-}
-
-.text-link:hover::after,
-.text-link:focus-visible::after { transform: scaleX(1); }
-
-.text-link span { transition: transform 0.3s var(--ease); }
-.text-link:hover span { transform: translate(3px, -3px); }
-
 /* ==========================================================================
    Buttons
    ========================================================================== */
@@ -194,8 +171,8 @@ blockquote {
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 17px 28px;
+  gap: 8px;
+  padding: 16px 32px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -211,10 +188,10 @@ blockquote {
 .btn:active { transform: scale(0.98); }
 
 .btn-solid {
-  background: var(--paper-light);
+  background: var(--brass);
   color: var(--ink);
 }
-.btn-solid:hover { background: var(--brass); color: var(--ink); }
+.btn-solid:hover { background: var(--cognac); color: var(--ink); }
 
 .btn-outline-light {
   border-color: rgba(232, 224, 211, 0.4);
@@ -252,27 +229,72 @@ blockquote {
 .btn-link:hover { border-color: var(--paper-light); }
 
 /* ==========================================================================
+   Top bar
+   ========================================================================== */
+
+.top-bar {
+  background: var(--brass);
+  color: var(--ink);
+}
+
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.top-bar-contacts {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.top-bar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.top-bar-item svg { flex-shrink: 0; }
+a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
+
+.top-bar-social {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.top-bar-social a { color: var(--ink); display: inline-flex; transition: color 0.25s var(--ease); }
+.top-bar-social a:hover { color: var(--ink-soft); }
+
+/* ==========================================================================
    Header
    ========================================================================== */
 
-.site-header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
+.header-group {
+  position: sticky;
+  top: 0;
   z-index: 500;
-  padding: 26px 0;
-  background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease), padding 0.4s var(--ease), transform 0.4s var(--ease);
+  transition: transform 0.4s var(--ease);
+}
+
+.header-group.is-hidden { transform: translateY(-100%); }
+
+.site-header {
+  padding: 24px 0;
+  background: var(--ink);
+  border-bottom: 1px solid var(--line-dark);
+  transition: padding 0.4s var(--ease);
 }
 
 .site-header.is-scrolled {
-  background: rgba(11, 10, 9, 0.92);
-  backdrop-filter: blur(10px);
-  border-bottom-color: var(--line-dark);
   padding: 16px 0;
+  backdrop-filter: blur(10px);
 }
-
-.site-header.is-hidden { transform: translateY(-100%); }
 
 .header-inner {
   display: flex;
@@ -303,7 +325,7 @@ blockquote {
 
 .main-nav {
   display: flex;
-  gap: 36px;
+  gap: 32px;
 }
 
 .main-nav a {
@@ -313,7 +335,7 @@ blockquote {
   text-transform: uppercase;
   color: var(--paper-light);
   position: relative;
-  padding-bottom: 3px;
+  padding-bottom: 4px;
 }
 
 .main-nav a::after {
@@ -334,7 +356,7 @@ blockquote {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
 .lang-toggle {
@@ -354,13 +376,22 @@ blockquote {
 
 .header-cta { padding: 12px 22px; }
 
+.mobile-nav-phones {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+  text-align: center;
+}
+.mobile-nav-phones a { font-size: 18px; color: var(--muted); }
+
 .menu-toggle {
   display: none;
   width: 40px; height: 40px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
 }
 
 .menu-toggle span {
@@ -379,6 +410,7 @@ blockquote {
   z-index: 400;
   background: var(--ink);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -396,8 +428,9 @@ blockquote {
 .mobile-nav nav {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 32px;
   text-align: center;
+  width: var(--shell-width);
 }
 
 .mobile-nav a {
@@ -406,13 +439,26 @@ blockquote {
   color: var(--paper-light);
 }
 
+.mobile-nav a.mobile-nav-cta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--brass);
+  padding: 16px 32px;
+}
+
 /* ==========================================================================
    Hero
    ========================================================================== */
 
 .hero {
   position: relative;
-  min-height: 100svh;
+  /* the sticky header takes real space above, so the first screen is
+     viewport minus header — otherwise the CTAs fall below the fold */
+  min-height: calc(100svh - var(--header-h, 123px));
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -458,10 +504,12 @@ blockquote {
 .hero-inner {
   position: relative;
   z-index: 2;
-  padding-bottom: clamp(70px, 9vw, 120px);
-  padding-top: 160px;
-  max-width: 780px;
+  padding-bottom: var(--section-pad-y-sm);
+  padding-top: var(--section-pad-y-sm);
 }
+
+/* the copy block keeps a readable measure but starts on the grid's left edge */
+.hero-inner > * { max-width: 780px; }
 
 .hero-inner .eyebrow,
 .hero-title,
@@ -484,7 +532,7 @@ blockquote {
   line-height: 0.86;
   letter-spacing: -0.01em;
   color: var(--paper-light);
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .hero-title em {
@@ -509,28 +557,14 @@ blockquote {
 }
 
 /* ==========================================================================
-   Stats bar
+   Stats (used inside the HERMOSE panel)
    ========================================================================== */
 
-.stats-bar {
-  background: var(--ink);
-  border-top: 1px solid var(--line-dark);
-}
-
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
 .stat {
-  padding: 34px 30px;
-  border-left: 1px solid var(--line-dark);
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-
-.stat:first-child { border-left: none; }
 
 .stat-value {
   font-family: var(--font-serif);
@@ -545,15 +579,6 @@ blockquote {
   color: var(--muted);
 }
 
-.stat-mark {
-  align-items: flex-end;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 34px;
-  color: var(--brass);
-}
-
 /* ==========================================================================
    Salon
    ========================================================================== */
@@ -565,21 +590,23 @@ blockquote {
 
 .salon-grid {
   display: grid;
-  grid-template-columns: 0.85fr 1fr;
-  gap: clamp(40px, 6vw, 100px);
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(40px, 5vw, 80px);
   align-items: center;
 }
 
 .salon-text h2 { margin-bottom: 26px; }
 
-.salon-text blockquote { color: var(--cognac); border-left-color: var(--cognac); }
+.salon-process-label { margin: 40px 0 0; }
 
 .salon-media { position: relative; }
+
+.salon-media .media-frame { aspect-ratio: 1 / 1; }
 
 .media-frame {
   position: relative;
   border: 1px solid var(--line-light);
-  padding: 18px;
+  padding: 16px;
   aspect-ratio: 4 / 5;
 }
 
@@ -592,66 +619,11 @@ blockquote {
   background-position: center;
 }
 
-.media-video {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background-color: #2a2118;
-}
-
 .media-placeholder--salon {
   background-color: #241d16;
   background-image: url("../images/senator-salon-detail.jpg");
   background-size: cover;
   background-position: center;
-}
-
-/* ==========================================================================
-   Manifesto
-   ========================================================================== */
-
-.manifesto {
-  position: relative;
-  background: var(--ink);
-  padding: var(--section-pad-y) 0;
-  overflow: hidden;
-}
-
-.manifesto-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: var(--font-serif);
-  font-size: clamp(60px, 12vw, 220px);
-  color: rgba(232, 224, 211, 0.035);
-  white-space: nowrap;
-  letter-spacing: 0.04em;
-  pointer-events: none;
-}
-
-.manifesto-inner { position: relative; max-width: 760px; }
-
-.manifesto-inner h2 {
-  color: var(--paper-light);
-  margin-bottom: 30px;
-}
-
-.manifesto-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(24px, 2.6vw, 32px);
-  color: var(--brass);
-  margin-bottom: 36px;
-}
-
-.manifesto-body {
-  font-size: 15px;
-  line-height: 1.85;
-  color: rgba(232, 224, 211, 0.72);
-  max-width: 44ch;
 }
 
 /* ==========================================================================
@@ -677,7 +649,7 @@ blockquote {
 .hermose-panel {
   background: var(--ink-soft);
   color: var(--paper-light);
-  padding: 70px 56px;
+  padding: 72px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -687,30 +659,28 @@ blockquote {
   font-family: var(--font-serif);
   font-size: clamp(38px, 3.4vw, 54px);
   letter-spacing: 0.1em;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
 }
 
 .hermose-panel .body-text { color: rgba(232, 224, 211, 0.78); margin-bottom: 30px; max-width: 32ch; }
+
+.hermose-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--line-dark);
+}
+
+.hermose-stats .stat { padding: 0; border: none; flex: 1 1 100px; gap: 6px; }
+.hermose-stats .stat-value { font-size: 20px; }
 
 .hermose-fact {
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  padding-top: 22px;
-  margin-bottom: 32px;
-  border-top: 1px solid var(--line-dark);
-}
-
-.hermose-panel .btn-outline {
-  border-color: var(--line-dark);
-  color: var(--paper-light);
-  align-self: flex-start;
-}
-.hermose-panel .btn-outline:hover {
-  background: var(--paper-light);
-  color: var(--ink);
-  border-color: var(--paper-light);
 }
 
 /* ==========================================================================
@@ -795,7 +765,7 @@ blockquote {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .look-name { font-family: var(--font-serif); font-size: 28px; }
@@ -808,83 +778,38 @@ blockquote {
 }
 
 /* ==========================================================================
-   Process
+   Process (part of the Salon section)
    ========================================================================== */
-
-.process { background: var(--ink); padding: var(--section-pad-y) 0; }
-
-.process > .shell:first-child { max-width: 760px; margin-bottom: 70px; }
-
-.process h2 { color: var(--paper-light); }
 
 .process-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
-  border-top: 1px solid var(--line-dark);
+  margin-top: 16px;
+  border-top: 1px solid var(--line-light);
 }
 
 .process-step {
-  padding: 44px 40px 0 0;
-  border-left: 1px solid var(--line-dark);
-  padding-left: 32px;
+  padding: 24px 16px 0 16px;
+  border-left: 1px solid var(--line-light);
 }
 
 .process-step:first-child { border-left: none; padding-left: 0; }
 
 .process-index {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.1em;
-  color: var(--brass);
-  margin-bottom: 26px;
+  color: var(--accent-on-light);
+  margin-bottom: 8px;
 }
 
-.process-step h3 { color: var(--paper-light); margin-bottom: 16px; }
+.process-step h3 { font-size: 21px; margin-bottom: 8px; }
 
 .process-step p {
-  font-size: 14px;
-  line-height: 1.8;
-  color: rgba(232, 224, 211, 0.68);
-  max-width: 30ch;
-}
-
-/* ==========================================================================
-   Story
-   ========================================================================== */
-
-.story { background: var(--paper-light); padding: var(--section-pad-y) 0; }
-
-.story-grid {
-  display: grid;
-  grid-template-columns: 0.85fr 1fr;
-  gap: clamp(40px, 6vw, 100px);
-  align-items: start;
-}
-
-.story-text h2 { margin-bottom: 24px; }
-.story-lead { font-size: 17px; line-height: 1.6; color: var(--ink); margin-bottom: 24px; max-width: 42ch; }
-.story-text .body-text { margin-bottom: 26px; }
-
-.story-strong {
-  font-family: var(--font-serif);
-  font-size: 24px;
-  font-style: italic;
-  color: var(--cognac);
-  padding: 22px 0;
-  margin: 8px 0 26px;
-  border-top: 1px solid var(--line-light);
-  border-bottom: 1px solid var(--line-light);
-}
-
-.story-media .media-frame { aspect-ratio: 3 / 4; }
-
-.story-years {
-  position: absolute;
-  bottom: 22px; left: 22px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--paper-light);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--ink-soft);
 }
 
 /* ==========================================================================
@@ -906,7 +831,7 @@ blockquote {
 .visit-hours {
   font-size: 15px;
   color: rgba(232, 224, 211, 0.78);
-  padding-bottom: 14px;
+  padding-bottom: 16px;
 }
 
 .visit-address { border-bottom: 1px solid var(--line-dark); margin-bottom: 12px; }
@@ -929,7 +854,7 @@ blockquote {
   background: var(--ink);
   border: 1px solid var(--line-dark);
   border-top: none;
-  padding: 16px 22px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -952,7 +877,7 @@ blockquote {
 .site-footer {
   background: var(--cognac);
   color: var(--ink);
-  padding: 90px 0 34px;
+  padding: 96px 0 32px;
 }
 
 .footer-wordmark {
@@ -969,7 +894,7 @@ blockquote {
   align-items: flex-end;
   gap: 24px;
   flex-wrap: wrap;
-  padding-top: 28px;
+  padding-top: 32px;
   border-top: 1px solid rgba(11, 10, 9, 0.22);
 }
 
@@ -1045,10 +970,7 @@ blockquote {
   .menu-toggle { display: flex; }
 
   .salon-grid,
-  .story-grid,
   .visit-grid { grid-template-columns: 1fr; }
-
-  .story-media { order: -1; }
 
   .hermose { grid-template-columns: 1fr; }
   .hermose-media { aspect-ratio: 16 / 9; }
@@ -1057,19 +979,19 @@ blockquote {
   .looks-grid { grid-template-columns: 1fr 1fr; }
   .look-card--tall { grid-column: span 2; margin-top: 0; aspect-ratio: 16 / 10; }
 
-  .process-grid { grid-template-columns: 1fr; border-top: none; }
-  .process-step {
-    border-left: none;
-    padding-left: 0;
-    padding-top: 30px;
-    border-top: 1px solid var(--line-dark);
-  }
-  .process-step:first-child { border-top: none; }
+  .salon-media .media-frame { aspect-ratio: 2.2 / 1; }
 
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .stat:nth-child(2) { border-left: 1px solid var(--line-dark); }
-  .stat:nth-child(3) { border-left: none; border-top: 1px solid var(--line-dark); }
-  .stat-mark { border-left: 1px solid var(--line-dark); border-top: 1px solid var(--line-dark); }
+  .hermose-stats { flex-direction: column; gap: 18px; }
+}
+
+/* Short viewports (21:9 monitors, laptops): keep the whole hero on one screen */
+@media (min-width: 768px) and (max-height: 900px) {
+  .hero-inner {
+    padding-top: var(--section-pad-y-xs);
+    padding-bottom: var(--section-pad-y-xs);
+  }
+  .hero-title { font-size: clamp(44px, 5.2vw, 88px); margin-bottom: 24px; }
+  .hero-lead { margin-bottom: 32px; }
 }
 
 /* ==========================================================================
@@ -1077,8 +999,8 @@ blockquote {
    ========================================================================== */
 
 @media (max-width: 767px) {
-  .hero { min-height: 860px; }
-  .hero-inner { padding-top: 130px; }
+  .hero { min-height: calc(100svh - var(--header-h, 121px)); }
+  .hero-inner { padding-top: var(--section-pad-y-xs); }
   .hero-title { font-size: clamp(56px, 16vw, 88px); }
   .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 20px; }
 
@@ -1086,16 +1008,19 @@ blockquote {
   .hero-cta-row .btn { width: auto; }
   .hero-cta-row .btn-solid { width: 100%; justify-content: space-between; }
 
-  .stats-grid { grid-template-columns: 1fr; }
-  .stat { border-left: none !important; border-top: 1px solid var(--line-dark); }
-  .stat:first-child { border-top: none; }
-  .stat-mark { justify-content: flex-start; padding-top: 20px; }
-
   .looks-grid { grid-template-columns: 1fr; }
   .look-card,
   .look-card--tall { aspect-ratio: auto; height: 540px; grid-column: auto; margin-top: 0; }
 
   .looks-head { flex-direction: column; align-items: flex-start; gap: 20px; }
+
+  .process-grid { grid-template-columns: 1fr; border-top: none; }
+  .process-step {
+    border-left: none;
+    padding: 24px 0 0;
+    border-top: 1px solid var(--line-light);
+  }
+  .process-step:first-child { border-top: none; }
 
   .visit-cta-row { flex-direction: column; align-items: stretch; }
   .visit-cta-row .btn { width: 100%; justify-content: space-between; }
@@ -1106,6 +1031,7 @@ blockquote {
   .footer-meta { flex-direction: column; gap: 14px; }
 
   .header-cta { display: none; }
+  .top-bar-item.top-bar-address { display: none; }
 }
 
 /* ==========================================================================
@@ -1114,7 +1040,7 @@ blockquote {
 
 .page-header {
   background: var(--ink);
-  padding: 168px 0 64px;
+  padding: var(--section-pad-y-sm) 0 clamp(40px, 4vw, 64px);
 }
 
 .page-header .eyebrow { margin-bottom: 18px; }
@@ -1129,7 +1055,7 @@ h1.page-title {
 }
 
 .page-header .page-lead {
-  margin-top: 18px;
+  margin-top: 16px;
   font-size: 15px;
   color: rgba(232, 224, 211, 0.7);
   max-width: 48ch;
@@ -1143,8 +1069,8 @@ h1.page-title {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 22px;
+  color: var(--muted-on-light);
+  margin-bottom: 24px;
 }
 .back-link:hover { color: var(--paper-light); }
 .back-link span { transition: transform 0.3s var(--ease); }
@@ -1181,7 +1107,7 @@ h1.page-title {
    Catalog
    ========================================================================== */
 
-.catalog-section { background: var(--paper); padding: 80px 0 var(--section-pad-y); }
+.catalog-section { background: var(--paper); padding: var(--section-pad-y-sm) 0 var(--section-pad-y); }
 
 .catalog-layout {
   display: grid;
@@ -1195,7 +1121,7 @@ h1.page-title {
   top: 110px;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 24px;
 }
 
 .filter-group { display: flex; flex-direction: column; gap: 2px; }
@@ -1205,13 +1131,13 @@ h1.page-title {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin: 14px 0 8px;
+  color: var(--muted-on-light);
+  margin: 16px 0 8px;
 }
 
 .filter-btn {
   text-align: left;
-  padding: 7px 0;
+  padding: 8px 0;
   font-size: 14px;
   color: var(--ink-soft);
   border-left: 2px solid transparent;
@@ -1220,8 +1146,8 @@ h1.page-title {
 }
 .filter-btn:hover { color: var(--ink); }
 .filter-btn.is-active {
-  color: var(--cognac);
-  border-left-color: var(--cognac);
+  color: var(--accent-on-light);
+  border-left-color: var(--accent-on-light);
   font-weight: 600;
 }
 
@@ -1230,7 +1156,7 @@ h1.page-title {
   font-size: 19px;
   padding-left: 0;
   border-left: none;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 .filter-btn--all.is-active { border-left: none; }
 
@@ -1248,7 +1174,7 @@ h1.page-title {
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--muted-on-light);
 }
 
 .catalog-sort { display: flex; align-items: center; gap: 10px; }
@@ -1257,14 +1183,14 @@ h1.page-title {
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--muted-on-light);
 }
 
 .catalog-sort select {
   border: 1px solid var(--line-light);
   background: var(--paper-light);
   color: var(--ink);
-  padding: 9px 14px;
+  padding: 8px 16px;
   font-size: 13px;
   font-family: var(--font-sans);
   border-radius: 1px;
@@ -1274,7 +1200,7 @@ h1.page-title {
 .catalog-no-results {
   color: var(--muted);
   font-size: 14px;
-  padding: 60px 0;
+  padding: 64px 0;
   text-align: center;
 }
 
@@ -1294,6 +1220,14 @@ h1.page-title {
   margin-bottom: 16px;
 }
 
+.product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.product-card:hover .product-media img { transform: scale(1.05); }
+
 .product-card .product-placeholder { transition: transform 0.5s var(--ease); }
 .product-card:hover .product-placeholder { transform: scale(1.05); }
 
@@ -1303,7 +1237,7 @@ h1.page-title {
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--muted-on-light);
 }
 
 .product-name {
@@ -1314,7 +1248,7 @@ h1.page-title {
 .product-price {
   font-size: 13px;
   font-weight: 600;
-  color: var(--cognac);
+  color: var(--accent-on-light);
   margin-top: 4px;
 }
 
@@ -1322,7 +1256,8 @@ h1.page-title {
    Product detail
    ========================================================================== */
 
-.product-page { background: var(--paper); padding: 160px 0 var(--section-pad-y); }
+/* no dark page-header band above, so the top can sit tighter than other pages */
+.product-page { background: var(--paper); padding: var(--section-pad-y-xs) 0 var(--section-pad-y); }
 
 .product-layout {
   display: grid;
@@ -1331,21 +1266,98 @@ h1.page-title {
   align-items: start;
 }
 
-.product-detail-media {
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--line-light);
-  overflow: hidden;
+/* photo gallery: one stage, photos swap in place */
+.product-gallery {
   position: sticky;
-  top: 110px;
+  top: 104px;
+  max-width: 440px;
 }
 
-.product-detail-category {
+.product-gallery-stage {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border: 1px solid var(--line-light);
+  background: var(--paper-light);
+  overflow: hidden;
+}
+
+.product-gallery-stage img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+}
+
+/* products without photos keep the identical frame, placeholder art inside it */
+.product-gallery-stage .product-placeholder { position: absolute; inset: 0; }
+
+.product-gallery-stage img.is-active { opacity: 1; }
+
+.gallery-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--ink);
+  background: rgba(242, 237, 229, 0.86);
+  border: 1px solid var(--line-light);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+
+.gallery-prev { left: 16px; }
+.gallery-next { right: 16px; }
+
+.product-gallery:hover .gallery-nav,
+.gallery-nav:focus-visible { opacity: 1; }
+.gallery-nav:hover { background: var(--paper-light); }
+
+.product-gallery-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  min-height: 8px;
+}
+
+.product-gallery-dots button {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line-light);
+  transition: background-color 0.3s var(--ease);
+}
+
+.product-gallery-dots button.is-active { background: var(--cognac); }
+
+.product-detail-sizes {
+  font-size: 14px;
+  color: var(--ink-soft);
+  margin: 16px 0 24px;
+}
+
+.product-detail-sizes span {
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brass);
-  margin-bottom: 16px;
+  color: var(--muted-on-light);
+  margin-right: 8px;
 }
+
+/* same eyebrow component as the rest of the site, just a tighter gap to the title */
+.product-detail-category { margin-bottom: 16px; }
 
 .product-detail-info h1 {
   font-family: var(--font-serif);
@@ -1358,8 +1370,8 @@ h1.page-title {
 .product-detail-price {
   font-size: 22px;
   font-weight: 600;
-  color: var(--cognac);
-  margin-bottom: 28px;
+  color: var(--accent-on-light);
+  margin-bottom: 32px;
 }
 
 .product-detail-desc {
@@ -1367,7 +1379,7 @@ h1.page-title {
   line-height: 1.85;
   color: var(--ink-soft);
   max-width: 52ch;
-  padding-top: 28px;
+  padding-top: 32px;
   border-top: 1px solid var(--line-light);
 }
 
@@ -1375,7 +1387,7 @@ h1.page-title {
   font-size: 13px;
   line-height: 1.6;
   color: var(--ink-soft);
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 
 .product-cta-row {
@@ -1390,9 +1402,10 @@ h1.page-title {
    Checkout / lead forms
    ========================================================================== */
 
-.checkout-section { background: var(--paper); padding: 160px 0 var(--section-pad-y); }
+.checkout-section { background: var(--paper); padding: var(--section-pad-y-sm) 0 var(--section-pad-y); }
 
-.lead-form-shell { max-width: 640px; }
+/* full grid width so the form starts on the same left edge as the page title */
+.lead-form-shell > * { max-width: 640px; }
 
 .form-fieldset {
   border: none;
@@ -1426,7 +1439,7 @@ h1.page-title {
 .form-group select,
 .form-group textarea {
   border: 1px solid var(--line-light);
-  padding: 14px 16px;
+  padding: 16px 16px;
   font-size: 14px;
   font-family: var(--font-sans);
   background: var(--paper-light);
@@ -1460,7 +1473,7 @@ h1.page-title {
 .form-checkbox-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   margin: -4px 0 24px;
   font-size: 13px;
   color: var(--ink-soft);
@@ -1487,25 +1500,33 @@ h1.page-title {
    ========================================================================== */
 
 .confirm-section {
-  background: var(--ink);
-  min-height: 100svh;
+  /* same shot as the hero, with the same left-side scrim so the copy stays legible */
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(90deg, rgba(11, 10, 9, 0.94) 0%, rgba(11, 10, 9, 0.8) 38%, rgba(11, 10, 9, 0.4) 70%, rgba(11, 10, 9, 0.2) 100%),
+    url("../images/senator-hero.jpg");
+  background-size: cover, cover;
+  background-position: center, right top;
+  background-repeat: no-repeat, no-repeat;
+  /* same as the hero: the header takes real space above this section */
+  min-height: calc(100svh - var(--header-h, 123px));
   display: flex;
   align-items: center;
-  padding: 160px 0 100px;
+  padding: var(--section-pad-y-sm) 0 var(--section-pad-y-sm);
 }
 
 .confirm-inner { max-width: 620px; }
-.confirm-inner h1 { color: var(--paper-light); margin-bottom: 20px; }
-.confirm-inner p { color: rgba(232, 224, 211, 0.78); font-size: 15px; line-height: 1.85; margin-bottom: 12px; }
-.confirm-actions { margin-top: 36px; display: flex; gap: 20px; flex-wrap: wrap; }
+.confirm-inner h1 { margin-bottom: 20px; }
+.confirm-inner p:not(.eyebrow) { color: rgba(232, 224, 211, 0.78); font-size: 15px; line-height: 1.85; margin-bottom: 12px; }
+.confirm-actions { margin-top: 32px; display: flex; gap: 20px; flex-wrap: wrap; }
 
 /* ==========================================================================
    Legal pages
    ========================================================================== */
 
-.legal-page { background: var(--paper); padding: 80px 0 var(--section-pad-y); }
+.legal-page { background: var(--paper); padding: var(--section-pad-y-sm) 0 var(--section-pad-y); }
 
-.legal-content { max-width: 74ch; }
+.legal-content > * { max-width: 74ch; }
 
 .legal-content h2 {
   font-size: clamp(22px, 2.4vw, 28px);
@@ -1523,7 +1544,7 @@ h1.page-title {
 .legal-content ol,
 .legal-content ul {
   margin: 0 0 20px;
-  padding-left: 22px;
+  padding-left: 24px;
 }
 
 .legal-content li {
@@ -1535,27 +1556,37 @@ h1.page-title {
 
 .legal-content strong { color: var(--ink); }
 
-.legal-placeholder {
-  background: var(--paper-light);
-  border: 1px dashed var(--cognac);
-  padding: 1px 6px;
-  color: var(--cognac);
+/* shown only when the request came from a product page.
+   the explicit [hidden] rule is required: display:flex would otherwise
+   win over the browser's default styling for the attribute */
+.consultation-product[hidden] { display: none; }
+
+.consultation-product {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-light);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.consultation-product span {
+  font-size: 11px;
   font-weight: 600;
-  white-space: nowrap;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-on-light);
 }
 
 .legal-notice {
   font-size: 13px;
   line-height: 1.7;
-  color: var(--muted);
+  color: var(--muted-on-light);
   border-left: 2px solid var(--line-light);
-  padding: 4px 0 4px 18px;
+  padding: 4px 0 4px 16px;
   margin-bottom: 40px;
-}
-
-.legal-notice--draft {
-  color: var(--cognac);
-  border-left-color: var(--cognac);
 }
 
 /* ==========================================================================
@@ -1569,7 +1600,7 @@ h1.page-title {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px 6px;
+    gap: 8px 8px;
     margin-bottom: 40px;
   }
   .filter-group { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; }
@@ -1579,12 +1610,20 @@ h1.page-title {
   .filter-btn--all { margin-bottom: 0; margin-right: 10px; }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); }
   .product-layout { grid-template-columns: 1fr; }
-  .product-detail-media { position: static; max-width: 480px; }
+  .product-gallery { position: static; max-width: 480px; }
 }
 
 @media (max-width: 767px) {
   .catalog-grid { grid-template-columns: 1fr; }
   .catalog-toolbar { flex-direction: column; align-items: flex-start; gap: 14px; }
-  .page-header { padding: 140px 0 48px; }
+  .page-header { padding: var(--section-pad-y-sm) 0 clamp(40px, 4vw, 64px); }
+
+  /* narrow screens: the copy spans the full width, so the side-to-side scrim
+     would leave it over the bright part of the photo — darken evenly instead */
+  .confirm-section {
+    background-image:
+      linear-gradient(180deg, rgba(11, 10, 9, 0.9) 0%, rgba(11, 10, 9, 0.86) 55%, rgba(11, 10, 9, 0.92) 100%),
+      url("../images/senator-hero.jpg");
+  }
   .product-cta-row .btn { width: 100%; }
 }

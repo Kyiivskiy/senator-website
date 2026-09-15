@@ -39,26 +39,21 @@
     return n + " " + pluralUk(n, "товар", "товари", "товарів");
   }
 
+  /* Fixed catalog structure: the sidebar stays the same whether or not a
+     category currently has items, so it does not shuffle as stock changes. */
+  var CATALOG_STRUCTURE = [
+    {
+      group: { uk: "Одяг", en: "Clothing" },
+      categories: [
+        { uk: "Костюми", en: "Suits" },
+        { uk: "Брюки", en: "Trousers" },
+        { uk: "Сорочки", en: "Shirts" }
+      ]
+    }
+  ];
+
   function getGroups() {
-    var products = window.SENATOR_PRODUCTS || [];
-    var groups = [];
-    var groupIndex = {};
-
-    products.forEach(function (p) {
-      var groupKey = p.group.uk;
-      if (!(groupKey in groupIndex)) {
-        groupIndex[groupKey] = groups.length;
-        groups.push({ group: p.group, categories: [], categoryKeys: {} });
-      }
-      var groupEntry = groups[groupIndex[groupKey]];
-      var catKey = p.category.uk;
-      if (!(catKey in groupEntry.categoryKeys)) {
-        groupEntry.categoryKeys[catKey] = true;
-        groupEntry.categories.push(p.category);
-      }
-    });
-
-    return groups;
+    return CATALOG_STRUCTURE;
   }
 
   function renderFilters() {
@@ -109,6 +104,18 @@
     return sorted;
   }
 
+  function priceLabel(p, lang) {
+    var amount = p.price;
+    var prefix = "";
+
+    if (p.priceTiers && p.priceTiers.length) {
+      amount = Math.min.apply(null, p.priceTiers.map(function (t) { return t.price; }));
+      prefix = lang === "en" ? "from " : "від ";
+    }
+
+    return prefix + amount.toLocaleString("uk-UA") + " грн";
+  }
+
   function renderGrid() {
     var lang = currentLang();
     var products = window.SENATOR_PRODUCTS || [];
@@ -129,14 +136,17 @@
     if (noResultsEl) noResultsEl.hidden = true;
 
     grid.innerHTML = filtered.map(function (p) {
+      var media = p.images && p.images.length
+        ? '<img src="' + p.images[0] + '" alt="' + p.name[lang] + '" loading="lazy">'
+        : '<div class="product-placeholder ' + p.tone + '">' + placeholderSvg() +
+          "<span>" + photoLabel(lang) + "</span></div>";
+
       return '<a class="product-card" href="product-' + p.id + '.html">' +
-        '<div class="product-media"><div class="product-placeholder ' + p.tone + '">' +
-        placeholderSvg() +
-        "<span>" + photoLabel(lang) + "</span></div></div>" +
+        '<div class="product-media">' + media + "</div>" +
         '<div class="product-info">' +
         '<span class="product-category">' + p.category[lang] + "</span>" +
         '<span class="product-name">' + p.name[lang] + "</span>" +
-        '<span class="product-price">' + p.price.toLocaleString("uk-UA") + " грн</span>" +
+        '<span class="product-price">' + priceLabel(p, lang) + "</span>" +
         "</div></a>";
     }).join("");
   }

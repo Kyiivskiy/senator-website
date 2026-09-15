@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-i18n-title="meta.title">Заявку прийнято - СЕНАТОР</title>
-<meta name="description" content="Заявку прийнято." data-i18n-meta="meta.description">
-<meta name="robots" content="noindex">
+<title data-i18n-title="meta.title">Брюки Челсі у синьому кольорі - СЕНАТОР</title>
+<meta name="description" content="Брюки Челсі у синьому кольорі, брюки від СЕНАТОР. 4,170 грн." data-i18n-meta="meta.description">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,16 +70,38 @@
 </div>
 
 <main id="main">
-
-  <section class="confirm-section">
+  <section class="product-page">
     <div class="shell">
-      <div class="confirm-inner reveal">
-        <p class="eyebrow" data-i18n="shop.confirmEyebrow">ЗАЯВКУ ПРИЙНЯТО</p>
-        <h1 class="page-title" data-i18n="shop.confirmTitle">Дякуємо! Ми скоро зв'яжемося.</h1>
-        <p data-i18n="shop.confirmBody">Менеджер СЕНАТОРА зателефонує вам найближчим часом, щоб узгодити деталі.</p>
-        <div class="confirm-actions">
-          <a class="btn btn-solid" href="index.html" data-i18n="shop.confirmBackHome">НА ГОЛОВНУ</a>
-          <a class="btn btn-link" href="catalog.html" data-i18n-html="shop.confirmToCatalog">ДО КАТАЛОГУ <span aria-hidden="true">↗</span></a>
+      <a class="back-link" href="catalog.html"><span aria-hidden="true">←</span> <span data-i18n="shop.backToCatalog">До каталогу</span></a>
+
+      <div class="product-layout">
+        <div class="product-gallery" data-gallery>
+          <div class="product-gallery-stage">
+            <img src="images/products/chelsea-trousers-navy-1.jpg" alt="Брюки Челсі у синьому кольорі" class="is-active">
+            <img src="images/products/chelsea-trousers-navy-2.jpg" alt="Брюки Челсі у синьому кольорі" loading="lazy">
+            <button type="button" class="gallery-nav gallery-prev" aria-label="Попереднє фото">‹</button>
+            <button type="button" class="gallery-nav gallery-next" aria-label="Наступне фото">›</button>
+          </div>
+          <div class="product-gallery-dots">
+            <button type="button" class="is-active" aria-label="Фото 1"></button>
+            <button type="button" aria-label="Фото 2"></button>
+          </div>
+        </div>
+
+        <div class="product-detail-info">
+          <p class="eyebrow product-detail-category">Одяг · Брюки</p>
+          <h1>Брюки Челсі у синьому кольорі</h1>
+          <p class="product-detail-price">4 170 грн</p>
+
+          <p class="product-detail-desc">Брюки Челсі у синьому кольорі: висока посадка, бічні регулятори, манжети.</p>
+
+          <p class="product-detail-sizes"><span>Розміри</span> 48 · 50 · 52 · 54 · 56 · 58</p>
+          <p class="product-detail-sizes product-detail-brand"><span>Бренд</span> HERMOSE</p>
+          <p class="product-availability-note" data-i18n="shop.productNote">Наявність розміру та кількості уточнює менеджер під час дзвінка.</p>
+
+          <div class="product-cta-row">
+            <a class="btn btn-solid" href="consultation.html?product=chelsea-trousers-navy" data-i18n-html="shop.productCtaConsultation">ЗАМОВИТИ ОНЛАЙН-КОНСУЛЬТАЦІЮ <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -105,6 +126,7 @@
   </div>
 </footer>
 
+<script src="js/products-data.js?v=36"></script>
 <script src="js/main.js?v=41"></script>
 </body>
 </html>

@@ -59,52 +59,25 @@
     } catch (err) {}
   }
 
-  function initFittingForm() {
-    var form = document.getElementById("fitting-form");
-    if (!form) return;
-
-    var productSelect = document.getElementById("field-product");
-    if (productSelect) {
-      var lang = currentLang();
-      var products = window.SENATOR_PRODUCTS || [];
-      products.forEach(function (p) {
-        var opt = document.createElement("option");
-        opt.value = p.id;
-        opt.textContent = p.name[lang];
-        productSelect.appendChild(opt);
-      });
-      var preselect = getQueryParam("product");
-      if (preselect && findProduct(preselect)) {
-        productSelect.value = preselect;
-      }
-    }
-
-    var consentBox = document.getElementById("field-consent");
-    var consentError = document.getElementById("consent-error");
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!validateForm(form, consentBox, consentError)) return;
-
-      var formData = new FormData(form);
-      var productId = formData.get("product");
-      var product = productId ? findProduct(productId) : null;
-
-      sendLead({
-        type: "fitting",
-        name: formData.get("name"),
-        phone: formData.get("phone"),
-        preferredTime: formData.get("preferredTime"),
-        product: product ? product.name[currentLang()] : ""
-      });
-
-      window.location.href = "success.html";
-    });
-  }
 
   function initConsultationForm() {
     var form = document.getElementById("consultation-form");
     if (!form) return;
+
+    /* Arriving from a product page (consultation.html?product=<id>): show the
+       customer which item the request is tied to and pass it to the manager. */
+    var product = findProduct(getQueryParam("product"));
+    if (product) {
+      var row = document.getElementById("consultation-product");
+      var nameEl = document.getElementById("consultation-product-name");
+      if (row && nameEl) {
+        nameEl.textContent = product.name[currentLang()];
+        row.hidden = false;
+        document.addEventListener("senator:langchange", function () {
+          nameEl.textContent = product.name[currentLang()];
+        });
+      }
+    }
 
     var consentBox = document.getElementById("field-consent");
     var consentError = document.getElementById("consent-error");
@@ -119,7 +92,9 @@
         type: "consultation",
         name: formData.get("name"),
         phone: formData.get("phone"),
-        preferredTime: formData.get("callTime")
+        preferredTime: formData.get("callTime"),
+        product: product ? product.name[currentLang()] : "",
+        website: formData.get("website") // honeypot: filled only by bots
       });
 
       window.location.href = "success.html";
@@ -127,7 +102,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initFittingForm();
     initConsultationForm();
   });
 })();
