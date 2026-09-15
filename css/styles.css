@@ -689,13 +689,15 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 .hermose-stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 16px 56px;
   padding-top: 24px;
   margin-bottom: 24px;
   border-top: 1px solid var(--line-dark);
 }
 
-.hermose-stats .stat { padding: 0; border: none; flex: 1 1 100px; gap: 6px; }
+/* sized to their content instead of stretching: on the 50/50 panel the two
+   figures grew until they sat at opposite edges, reading as unrelated */
+.hermose-stats .stat { padding: 0; border: none; flex: 0 0 auto; gap: 6px; }
 .hermose-stats .stat-value { font-size: 20px; }
 
 .hermose-fact {

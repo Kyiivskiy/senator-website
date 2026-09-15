@@ -33,7 +33,7 @@
   /* Fixed catalog structure: the sidebar stays the same whether or not a
      category currently has items, so it does not shuffle as stock changes. */
   var CATALOG_STRUCTURE = [
-    { group: "Одяг", categories: ["Костюми", "Брюки", "Сорочки"] }
+    { group: "Одяг", categories: ["Костюми", "Піджаки", "Брюки", "Сорочки"] }
   ];
 
   function renderFilters() {

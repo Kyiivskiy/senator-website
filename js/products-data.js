@@ -234,8 +234,8 @@ window.SENATOR_PRODUCTS = [
   {
     "id": "blue-summer-suit",
     "group": "Одяг",
-    "category": "Костюми",
-    "name": "Костюм літній без підкладки у синьому кольорі",
+    "category": "Піджаки",
+    "name": "Піджак літній без підкладки у синьому кольорі",
     "price": 6500,
     "sizes": [
       "48",
@@ -246,7 +246,7 @@ window.SENATOR_PRODUCTS = [
       "58"
     ],
     "tone": "tone-3",
-    "description": "Літній костюм без підкладки у синьому кольорі, у клітинку: піджак і штани.",
+    "description": "Літній піджак без підкладки у синьому кольорі, у клітинку.",
     "images": [
       "images/products/blue-summer-suit-1.jpg",
       "images/products/blue-summer-suit-2.jpg"
@@ -256,8 +256,8 @@ window.SENATOR_PRODUCTS = [
   {
     "id": "grey-summer-suit",
     "group": "Одяг",
-    "category": "Костюми",
-    "name": "Костюм літній без підкладки у світло-сірому кольорі",
+    "category": "Піджаки",
+    "name": "Піджак літній без підкладки у світло-сірому кольорі",
     "price": 6500,
     "sizes": [
       "48",
@@ -268,7 +268,7 @@ window.SENATOR_PRODUCTS = [
       "58"
     ],
     "tone": "tone-2",
-    "description": "Літній костюм без підкладки у світло-сірому кольорі, у клітинку: піджак і штани.",
+    "description": "Літній піджак без підкладки у світло-сірому кольорі, у клітинку.",
     "images": [
       "images/products/grey-summer-suit-1.jpg",
       "images/products/grey-summer-suit-2.jpg"
@@ -278,8 +278,8 @@ window.SENATOR_PRODUCTS = [
   {
     "id": "beige-summer-suit",
     "group": "Одяг",
-    "category": "Костюми",
-    "name": "Костюм літній без підкладки у світло-бежевому кольорі",
+    "category": "Піджаки",
+    "name": "Піджак літній без підкладки у світло-бежевому кольорі",
     "price": 6500,
     "sizes": [
       "48",
@@ -290,7 +290,7 @@ window.SENATOR_PRODUCTS = [
       "58"
     ],
     "tone": "tone-2",
-    "description": "Літній костюм без підкладки у світло-бежевому кольорі, у клітинку: піджак і штани.",
+    "description": "Літній піджак без підкладки у світло-бежевому кольорі, у клітинку.",
     "images": [
       "images/products/beige-summer-suit-1.jpg",
       "images/products/beige-summer-suit-2.jpg"
