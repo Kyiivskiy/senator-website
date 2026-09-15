@@ -28,7 +28,7 @@ HEAD = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=55">
+<link rel="stylesheet" href="css/styles.css?v=56">
 </head>
 <body>
 
@@ -62,7 +62,7 @@ HEAD = """<!DOCTYPE html>
     </nav>
 
     <div class="header-actions">
-      <a class="btn btn-solid header-cta" href="consultation.html">ОНЛАЙН-КОНСУЛЬТАЦІЯ <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-solid header-cta" href="consultation.html">ОНЛАЙН-КОНСУЛЬТАЦІЯ</a>
       <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="mobile-nav">
         <span></span><span></span><span></span>
         <span class="sr-only">Меню</span>
@@ -77,7 +77,7 @@ HEAD = """<!DOCTYPE html>
     <a href="catalog.html">Каталог</a>
     <a href="index.html#salon">Про салон</a>
     <a href="index.html#visit">Контакти</a>
-    <a class="mobile-nav-cta" href="consultation.html">ОНЛАЙН-КОНСУЛЬТАЦІЯ <span aria-hidden="true">↗</span></a>
+    <a class="mobile-nav-cta" href="consultation.html">ОНЛАЙН-КОНСУЛЬТАЦІЯ</a>
   </nav>
   <div class="mobile-nav-phones">
     <a href="tel:+380631840915">+380 63 184 09 15</a>
@@ -108,8 +108,8 @@ FOOTER = """
   </div>
 </footer>
 
-<script src="js/products-data.js?v=55"></script>
-<script src="js/main.js?v=55"></script>
+<script src="js/products-data.js?v=56"></script>
+<script src="js/main.js?v=56"></script>
 </body>
 </html>
 """
@@ -229,7 +229,7 @@ def build_product_pages():
           <p class="product-availability-note">Наявність розміру та кількості уточнює менеджер під час дзвінка.</p>
 
           <div class="product-cta-row">
-            <a class="btn btn-solid" href="consultation.html?product={p["id"]}">ОНЛАЙН-КОНСУЛЬТАЦІЯ <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-solid" href="consultation.html?product={p["id"]}">ОНЛАЙН-КОНСУЛЬТАЦІЯ</a>
           </div>
         </div>
       </div>

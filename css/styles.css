@@ -196,8 +196,6 @@ h3 {
   white-space: nowrap;
 }
 
-.btn span { transition: transform 0.3s var(--ease); }
-.btn:hover span { transform: translate(3px, -3px); }
 .btn:active { transform: scale(0.98); }
 
 .btn-solid {
@@ -1051,13 +1049,13 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
      (and drags the whole row with it). Let it wrap and tighten the padding. */
   .btn {
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     white-space: normal;
-    text-align: left;
+    text-align: center;
     padding: 16px 24px;
   }
   .hero-cta-row .btn { width: auto; }
-  .hero-cta-row .btn-solid { width: 100%; justify-content: space-between; }
+  .hero-cta-row .btn-solid { width: 100%; }
 
   .looks-grid { grid-template-columns: 1fr; }
   .look-card,
@@ -1074,7 +1072,7 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   .process-step:first-child { border-top: none; }
 
   .visit-cta-row { flex-direction: column; align-items: stretch; }
-  .visit-cta-row .btn { width: 100%; justify-content: space-between; }
+  .visit-cta-row .btn { width: 100%; }
 
   .visit-map iframe { height: 320px; }
 
