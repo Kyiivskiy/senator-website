@@ -1,10 +1,10 @@
 """
 SENATOR lead-notification backend.
 
-One job: receive a fitting-booking or phone-consultation request from
-the site and send a formatted message to the shop's Telegram bot. The
-site has no online sale (no cart, no payment) - a manager always calls
-the client back, so this is the entire "order" pipeline.
+One job: receive a phone-consultation request from the site and send a
+formatted message to the shop's Telegram bot. The site has no online sale
+(no cart, no payment) - a manager always calls the client back, so this is
+the entire "order" pipeline.
 
 Environment variables (set in the hosting platform's dashboard, never
 committed to git):

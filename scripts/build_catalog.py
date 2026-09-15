@@ -28,7 +28,7 @@ HEAD = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=48">
+<link rel="stylesheet" href="css/styles.css?v=49">
 </head>
 <body>
 
@@ -108,8 +108,8 @@ FOOTER = """
   </div>
 </footer>
 
-<script src="js/products-data.js?v=48"></script>
-<script src="js/main.js?v=48"></script>
+<script src="js/products-data.js?v=49"></script>
+<script src="js/main.js?v=49"></script>
 </body>
 </html>
 """
@@ -197,7 +197,7 @@ def build_brand(p):
     brand = p.get("brand")
     if not brand:
         return ""
-    return ('\n          <p class="product-detail-sizes product-detail-brand">'
+    return ('\n          <p class="product-detail-sizes">'
             f'<span>Бренд</span> {brand}</p>')
 
 
@@ -206,7 +206,7 @@ def build_price_tiers(p):
     if not tiers:
         return ""
     parts = " · ".join(f'{t["sizes"]} — {money(t["price"])} грн' for t in tiers)
-    return ('\n          <p class="product-detail-sizes product-detail-tiers">'
+    return ('\n          <p class="product-detail-sizes">'
             f'<span>Ціна</span> {parts}</p>')
 
 

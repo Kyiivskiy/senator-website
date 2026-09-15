@@ -1,9 +1,9 @@
 # SENATOR backend
 
 The site has no online sale - a manager always calls the client back. This
-backend's one job: receive a fitting-booking or phone-consultation request
-from `fitting.html` / `consultation.html` and send a formatted Telegram
-notification to the shop's bot.
+backend's one job: receive a phone-consultation request from
+`consultation.html` and send a formatted Telegram notification to the
+shop's bot.
 
 ## Local development
 
@@ -17,9 +17,10 @@ python app.py
 
 Server runs at `http://127.0.0.1:5000`. Check `GET /api/health` to confirm
 the bot token loaded, then `POST /api/notify-lead` with a JSON body matching
-the shape `js/leads.js` sends: `{"type": "fitting", "name", "phone",
-"preferredTime", "product"}` or `{"type": "consultation", "name", "phone",
-"preferredTime"}`.
+the shape `js/leads.js` sends: `{"type": "consultation", "name", "phone",
+"preferredTime", "product", "website"}`. `product` is empty unless the
+visitor came from a product page; `website` is the honeypot and must stay
+empty for the lead to be forwarded.
 
 ## Deploying to Render (free tier)
 
@@ -36,14 +37,17 @@ the shape `js/leads.js` sends: `{"type": "fitting", "name", "phone",
 5. Test it: `curl https://senator-backend.onrender.com/api/health` should
    return `{"ok": true, "configured": true}`.
 6. Paste that URL into `js/leads.js` (the `LEAD_NOTIFY_URL` constant near
-   the top of the file) so the fitting/consultation forms actually call it.
+   the top of the file) so the consultation form actually calls it.
 
 **Free tier note:** Render's free web services "spin down" after 15
 minutes of no traffic and take ~30-50 seconds to wake up on the next
-request. For a lead-notification call this is usually fine (the message
-arrives a little late, the form itself doesn't wait on it), but if that
-delay ever becomes a problem, upgrade to a paid instance or switch to a
-provider without a free-tier sleep (Railway, Fly.io).
+request. The form *does* wait for the backend to confirm it took the lead -
+it must, or a failed request would be reported to the customer as a success -
+so a cold start is a cold start the customer sits through. To avoid it,
+`.github/workflows/keep-backend-awake.yml` pings `/api/health` every ten
+minutes and keeps the instance warm. GitHub disables scheduled workflows in
+a repository with no activity for 60 days; re-enable it from the Actions tab
+if the site goes quiet for that long.
 
 ## Rotating the bot token
 

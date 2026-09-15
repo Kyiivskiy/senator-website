@@ -232,7 +232,7 @@ window.SENATOR_PRODUCTS = [
     "brand": "HERMOSE"
   },
   {
-    "id": "blue-summer-suit",
+    "id": "blue-summer-blazer",
     "group": "Одяг",
     "category": "Піджаки",
     "name": "Піджак літній без підкладки у синьому кольорі",
@@ -248,13 +248,13 @@ window.SENATOR_PRODUCTS = [
     "tone": "tone-3",
     "description": "Літній піджак без підкладки у синьому кольорі, у клітинку.",
     "images": [
-      "images/products/blue-summer-suit-1.jpg",
-      "images/products/blue-summer-suit-2.jpg"
+      "images/products/blue-summer-blazer-1.jpg",
+      "images/products/blue-summer-blazer-2.jpg"
     ],
     "brand": "HERMOSE"
   },
   {
-    "id": "grey-summer-suit",
+    "id": "grey-summer-blazer",
     "group": "Одяг",
     "category": "Піджаки",
     "name": "Піджак літній без підкладки у світло-сірому кольорі",
@@ -270,13 +270,13 @@ window.SENATOR_PRODUCTS = [
     "tone": "tone-2",
     "description": "Літній піджак без підкладки у світло-сірому кольорі, у клітинку.",
     "images": [
-      "images/products/grey-summer-suit-1.jpg",
-      "images/products/grey-summer-suit-2.jpg"
+      "images/products/grey-summer-blazer-1.jpg",
+      "images/products/grey-summer-blazer-2.jpg"
     ],
     "brand": "HERMOSE"
   },
   {
-    "id": "beige-summer-suit",
+    "id": "beige-summer-blazer",
     "group": "Одяг",
     "category": "Піджаки",
     "name": "Піджак літній без підкладки у світло-бежевому кольорі",
@@ -292,8 +292,8 @@ window.SENATOR_PRODUCTS = [
     "tone": "tone-2",
     "description": "Літній піджак без підкладки у світло-бежевому кольорі, у клітинку.",
     "images": [
-      "images/products/beige-summer-suit-1.jpg",
-      "images/products/beige-summer-suit-2.jpg"
+      "images/products/beige-summer-blazer-1.jpg",
+      "images/products/beige-summer-blazer-2.jpg"
     ],
     "brand": "HERMOSE"
   },

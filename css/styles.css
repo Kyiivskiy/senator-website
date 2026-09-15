@@ -73,7 +73,7 @@ body {
 
 img, iframe { max-width: 100%; display: block; }
 
-h1, h2, h3, p, blockquote, figure { margin: 0; }
+h1, h2, h3, p { margin: 0; }
 
 a { color: inherit; text-decoration: none; }
 
@@ -146,8 +146,7 @@ body::before {
 /* the same eyebrow on cream backgrounds — brass is unreadable there */
 .salon .eyebrow,
 .looks .eyebrow,
-.product-page .eyebrow,
-.catalog-section .eyebrow { color: var(--accent-on-light); }
+.product-page .eyebrow { color: var(--accent-on-light); }
 
 h2 {
   font-family: var(--font-serif);
@@ -1628,7 +1627,6 @@ h1.page-title {
   margin-bottom: 16px;
 }
 
-.legal-content ol,
 .legal-content ul {
   margin: 0 0 20px;
   padding-left: 24px;
@@ -1641,7 +1639,6 @@ h1.page-title {
   margin-bottom: 8px;
 }
 
-.legal-content strong { color: var(--ink); }
 
 /* shown only if the lead could not be delivered — never silently swallow it */
 .send-error[hidden] { display: none; }
@@ -1699,7 +1696,7 @@ h1.page-title {
   }
   .filter-group { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; }
   .filter-group-title { margin: 0 6px 0 0; }
-  .filter-btn { border-left: none; padding: 11px 0; padding-left: 0; }
+  .filter-btn { border-left: none; padding: 11px 0; }
   .filter-btn.is-active { border-left: none; text-decoration: underline; text-underline-offset: 3px; }
   .filter-btn--all { margin-bottom: 0; margin-right: 10px; }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); }
