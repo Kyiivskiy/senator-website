@@ -40,7 +40,7 @@
 }
 
 @media (max-width: 767px) {
-  :root { --shell-width: min(100% - 36px, 1440px); --header-h: 122px; }
+  :root { --shell-width: min(100% - 36px, 1440px); --header-h: 124px; }
 }
 
 /* ==========================================================================
@@ -274,6 +274,15 @@ h3 {
 .top-bar-item svg { flex-shrink: 0; }
 a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 
+/* Both numbers share one mark and are told apart by a dot, so the bar does
+   not repeat the same icon twice. */
+.top-bar-phones a:hover { text-decoration: underline; }
+
+.top-bar-sep {
+  margin: 0 8px;
+  opacity: 0.45;
+}
+
 
 .top-bar-social {
   display: flex;
@@ -338,9 +347,8 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 .header-inner > .header-actions { grid-column: 3; justify-self: end; }
 
 .wordmark-link {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: inline-flex;
+  align-items: center;
   line-height: 1;
 }
 
@@ -349,12 +357,6 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   font-size: 22px;
   letter-spacing: 0.14em;
   color: var(--paper-light);
-}
-
-.wordmark-sub {
-  font-size: 8px;
-  letter-spacing: 0.24em;
-  color: var(--muted);
 }
 
 .main-nav {
@@ -1089,7 +1091,6 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   .top-bar-contacts { gap: 14px; flex-wrap: nowrap; }
   .top-bar-item { gap: 6px; padding: 6px 0; white-space: nowrap; }
 
-  .wordmark-sub { font-size: 9px; letter-spacing: 0.18em; }
 
   /* stacked footer links: padding makes the row tappable, the smaller gap
      keeps the spacing between them looking the same as before */
@@ -1115,7 +1116,8 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 /* Very narrow phones (iPhone SE and friends): the second number no longer
    fits beside the first, and a wrapped bar is worse than one number. */
 @media (max-width: 359px) {
-  .top-bar-contacts .top-bar-item:nth-child(2) { display: none; }
+  .top-bar-phones a:last-of-type,
+  .top-bar-sep { display: none; }
 }
 
 /* ==========================================================================
