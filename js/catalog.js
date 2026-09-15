@@ -11,19 +11,11 @@
 
   var selectedCategory = null;
 
-  function currentLang() {
-    return document.documentElement.lang === "en" ? "en" : "uk";
-  }
-
   function placeholderSvg() {
     return '<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">' +
       '<path d="M18 10h12l3 6h5l-2 26H12L10 16h5l3-6z"/>' +
       '<path d="M18 10a6 6 0 0 0 12 0"/>' +
       "</svg>";
-  }
-
-  function photoLabel(lang) {
-    return lang === "en" ? "PRODUCT PHOTO" : "ФОТО ТОВАРУ";
   }
 
   function pluralUk(n, one, few, many) {
@@ -34,44 +26,29 @@
     return many;
   }
 
-  function countLabel(n, lang) {
-    if (lang === "en") return n + (n === 1 ? " product" : " products");
+  function countLabel(n) {
     return n + " " + pluralUk(n, "товар", "товари", "товарів");
   }
 
   /* Fixed catalog structure: the sidebar stays the same whether or not a
      category currently has items, so it does not shuffle as stock changes. */
   var CATALOG_STRUCTURE = [
-    {
-      group: { uk: "Одяг", en: "Clothing" },
-      categories: [
-        { uk: "Костюми", en: "Suits" },
-        { uk: "Брюки", en: "Trousers" },
-        { uk: "Сорочки", en: "Shirts" }
-      ]
-    }
+    { group: "Одяг", categories: ["Костюми", "Брюки", "Сорочки"] }
   ];
-
-  function getGroups() {
-    return CATALOG_STRUCTURE;
-  }
 
   function renderFilters() {
     if (!filtersEl) return;
-    var lang = currentLang();
-    var groups = getGroups();
 
-    var allLabel = lang === "en" ? "All products" : "Всі товари";
     var html = '<button type="button" class="filter-btn filter-btn--all' +
       (selectedCategory === null ? " is-active" : "") +
-      '" data-category="" data-i18n="shop.filterAll">' + allLabel + "</button>";
+      '" data-category="">Всі товари</button>';
 
-    groups.forEach(function (g) {
-      html += '<div class="filter-group"><p class="filter-group-title">' + g.group[lang] + "</p>";
+    CATALOG_STRUCTURE.forEach(function (g) {
+      html += '<div class="filter-group"><p class="filter-group-title">' + g.group + "</p>";
       g.categories.forEach(function (c) {
-        var active = selectedCategory === c.uk ? " is-active" : "";
+        var active = selectedCategory === c ? " is-active" : "";
         html += '<button type="button" class="filter-btn' + active + '" data-category="' +
-          c.uk.replace(/"/g, "&quot;") + '">' + c[lang] + "</button>";
+          c.replace(/"/g, "&quot;") + '">' + c + "</button>";
       });
       html += "</div>";
     });
@@ -89,7 +66,6 @@
   }
 
   function sortProducts(list) {
-    var lang = currentLang();
     var mode = sortSelect ? sortSelect.value : "name-asc";
     var sorted = list.slice();
 
@@ -98,35 +74,35 @@
     } else if (mode === "price-desc") {
       sorted.sort(function (a, b) { return b.price - a.price; });
     } else {
-      sorted.sort(function (a, b) { return a.name[lang].localeCompare(b.name[lang], lang); });
+      sorted.sort(function (a, b) { return a.name.localeCompare(b.name, "uk"); });
     }
 
     return sorted;
   }
 
-  function priceLabel(p, lang) {
+  function priceLabel(p) {
     var amount = p.price;
     var prefix = "";
 
+    // tiered pricing: the card shows the entry price, the detail page the range
     if (p.priceTiers && p.priceTiers.length) {
       amount = Math.min.apply(null, p.priceTiers.map(function (t) { return t.price; }));
-      prefix = lang === "en" ? "from " : "від ";
+      prefix = "від ";
     }
 
     return prefix + amount.toLocaleString("uk-UA") + " грн";
   }
 
   function renderGrid() {
-    var lang = currentLang();
     var products = window.SENATOR_PRODUCTS || [];
 
     var filtered = selectedCategory
-      ? products.filter(function (p) { return p.category.uk === selectedCategory; })
+      ? products.filter(function (p) { return p.category === selectedCategory; })
       : products;
 
     filtered = sortProducts(filtered);
 
-    if (countEl) countEl.textContent = countLabel(filtered.length, lang);
+    if (countEl) countEl.textContent = countLabel(filtered.length);
 
     if (!filtered.length) {
       grid.innerHTML = "";
@@ -137,16 +113,16 @@
 
     grid.innerHTML = filtered.map(function (p) {
       var media = p.images && p.images.length
-        ? '<img src="' + p.images[0] + '" alt="' + p.name[lang] + '" loading="lazy">'
+        ? '<img src="' + p.images[0] + '" alt="' + p.name + '" loading="lazy">'
         : '<div class="product-placeholder ' + p.tone + '">' + placeholderSvg() +
-          "<span>" + photoLabel(lang) + "</span></div>";
+          "<span>ФОТО ТОВАРУ</span></div>";
 
       return '<a class="product-card" href="product-' + p.id + '.html">' +
         '<div class="product-media">' + media + "</div>" +
         '<div class="product-info">' +
-        '<span class="product-category">' + p.category[lang] + "</span>" +
-        '<span class="product-name">' + p.name[lang] + "</span>" +
-        '<span class="product-price">' + priceLabel(p, lang) + "</span>" +
+        '<span class="product-category">' + p.category + "</span>" +
+        '<span class="product-name">' + p.name + "</span>" +
+        '<span class="product-price">' + priceLabel(p) + "</span>" +
         "</div></a>";
     }).join("");
   }
@@ -156,11 +132,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    renderFilters();
-    renderGrid();
-  });
-
-  document.addEventListener("senator:langchange", function () {
     renderFilters();
     renderGrid();
   });

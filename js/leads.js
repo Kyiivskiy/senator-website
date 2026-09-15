@@ -4,13 +4,7 @@
   var LEAD_NOTIFY_URL = "https://senator-backend.onrender.com/api/notify-lead";
   var LEAD_API_KEY = "u-M49VC0-u_azu8a095TezYA_gscB5TLkKlJB5Fddvo";
 
-  function currentLang() {
-    return document.documentElement.lang === "en" ? "en" : "uk";
-  }
-
-  // kept here rather than in main.js's dictionary: it is the only string this
-  // file needs, and reaching into that closure would couple the two scripts
-  var SENDING_LABEL = { uk: "ВІДПРАВЛЯЄМО…", en: "SENDING…" };
+  var SENDING_LABEL = "ВІДПРАВЛЯЄМО…";
 
   function findProduct(id) {
     var list = window.SENATOR_PRODUCTS || [];
@@ -85,11 +79,8 @@
       var row = document.getElementById("consultation-product");
       var nameEl = document.getElementById("consultation-product-name");
       if (row && nameEl) {
-        nameEl.textContent = product.name[currentLang()];
+        nameEl.textContent = product.name;
         row.hidden = false;
-        document.addEventListener("senator:langchange", function () {
-          nameEl.textContent = product.name[currentLang()];
-        });
       }
     }
 
@@ -109,7 +100,7 @@
       if (sendError) sendError.hidden = true;
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = SENDING_LABEL[currentLang()];
+        submitBtn.textContent = SENDING_LABEL;
       }
 
       sendLead({
@@ -117,7 +108,7 @@
         name: formData.get("name"),
         phone: formData.get("phone"),
         preferredTime: formData.get("callTime"),
-        product: product ? product.name[currentLang()] : "",
+        product: product ? product.name : "",
         website: formData.get("website") // honeypot: filled only by bots
       }).then(function () {
         window.location.href = "success.html";
