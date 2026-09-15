@@ -1534,6 +1534,9 @@ h1.page-title {
   border: 1px solid var(--line-light);
   padding: 16px 16px;
   font-size: 14px;
+  /* stated, not inherited: a select's default line box is taller than an
+     input's, and the two sat 2px out of line */
+  line-height: 1.25;
   font-family: var(--font-sans);
   background: var(--paper-light);
   color: var(--ink);
@@ -1541,6 +1544,19 @@ h1.page-title {
 }
 
 .form-group textarea { resize: vertical; min-height: 90px; }
+
+/* The native select renders a taller line box than an input, so the two sat
+   out of line. Dropping the platform styling levels them and lets the chevron
+   match the rest of the page. */
+.form-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 44px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%230b0a09' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><path d='M1 1.5 6 6.5 11 1.5'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
 
 .form-group input::placeholder,
 .form-group textarea::placeholder { color: var(--muted); }
