@@ -788,14 +788,6 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   pointer-events: none;
 }
 
-.look-arrow {
-  position: absolute;
-  top: 18px; right: 18px;
-  z-index: 2;
-  font-size: 16px;
-  transition: transform 0.35s var(--ease);
-}
-
 .look-caption {
   position: absolute;
   left: 24px; bottom: 22px;
@@ -811,7 +803,6 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 @media (hover: hover) {
   .look-card:hover { transform: translateY(-12px); }
   .look-card:hover .media-placeholder { transform: scale(1.06); }
-  .look-card:hover .look-arrow { transform: translate(3px, -3px); }
 }
 
 /* ==========================================================================
@@ -1015,8 +1006,6 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   .hermose-media { aspect-ratio: 16 / 9; }
   .hermose-panel { padding: 56px 40px; }
 
-  .looks-grid { grid-template-columns: 1fr 1fr; }
-  .look-card--tall { grid-column: span 2; margin-top: 0; aspect-ratio: 16 / 10; }
 
   .salon-media .media-frame { aspect-ratio: 2.2 / 1; }
 
