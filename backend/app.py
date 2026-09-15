@@ -89,15 +89,6 @@ def format_lead_message(lead):
     phone = escape(lead.get("phone", "-"))
     preferred_time = escape(lead.get("preferredTime", "-"))
 
-    if lead_type == "fitting":
-        lines = ["\U0001F4C5 <b>Новая заявка на примерку</b>", ""]
-        lines.append(f"\U0001F464 Имя: {name}")
-        lines.append(f"\U0001F4DE Телефон: {phone}")
-        lines.append(f"\U0001F552 Удобное время: {preferred_time}")
-        product = lead.get("product", "").strip()
-        lines.append(f"\U0001F454 Интересует: {escape(product) if product else 'не указано'}")
-        return "\n".join(lines)
-
     if lead_type == "consultation":
         lines = ["\U0001F4DE <b>Заявка на консультацию по телефону</b>", ""]
         lines.append(f"\U0001F464 Имя: {name}")

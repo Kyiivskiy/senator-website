@@ -23,6 +23,9 @@
   --font-sans: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --shell-width: min(100% - 96px, 1440px);
+  /* Resting height of the fixed header group. JS republishes the measured
+     value; this default keeps the first paint correct before it runs. */
+  --header-h: 123px;
   --section-pad-y: clamp(90px, 11vw, 180px);
   --section-pad-y-sm: clamp(56px, 6.5vw, 104px);
   --section-pad-y-xs: clamp(32px, 3.5vw, 56px);
@@ -37,7 +40,7 @@
 }
 
 @media (max-width: 767px) {
-  :root { --shell-width: min(100% - 36px, 1440px); }
+  :root { --shell-width: min(100% - 36px, 1440px); --header-h: 122px; }
 }
 
 /* ==========================================================================
@@ -48,6 +51,8 @@
 
 html {
   scroll-behavior: auto;
+  /* the header is fixed, so an anchor must stop below it, not under it */
+  scroll-padding-top: var(--header-h);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -56,6 +61,8 @@ html {
 
 body {
   margin: 0;
+  /* the header is taken out of the flow (see .header-group) — reserve its room */
+  padding-top: var(--header-h);
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans);
@@ -275,9 +282,16 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
    Header
    ========================================================================== */
 
+/* Fixed rather than sticky on purpose: iOS Safari re-anchors a sticky element
+   only after a scroll gesture settles, and while its toolbar collapses the
+   header lagged behind the top of the visible area, leaving a strip of the
+   page showing above it. A fixed element is positioned against the visual
+   viewport and never drifts. body carries the matching padding-top. */
 .header-group {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 500;
   transition: transform 0.4s var(--ease);
 }
@@ -458,7 +472,7 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
   position: relative;
   /* the sticky header takes real space above, so the first screen is
      viewport minus header — otherwise the CTAs fall below the fold */
-  min-height: calc(100svh - var(--header-h, 123px));
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -999,12 +1013,20 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
    ========================================================================== */
 
 @media (max-width: 767px) {
-  .hero { min-height: calc(100svh - var(--header-h, 121px)); }
-  .hero-inner { padding-top: var(--section-pad-y-xs); }
+    .hero-inner { padding-top: var(--section-pad-y-xs); }
   .hero-title { font-size: clamp(56px, 16vw, 88px); }
   .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 20px; }
 
-  .btn { width: 100%; justify-content: space-between; }
+  /* A nowrap label like "ЗАМОВИТИ ОНЛАЙН КОНСУЛЬТАЦІЮ" is ~320px wide, which
+     on a narrow phone blows the grid track it sits in past the screen edge
+     (and drags the whole row with it). Let it wrap and tighten the padding. */
+  .btn {
+    width: 100%;
+    justify-content: space-between;
+    white-space: normal;
+    text-align: left;
+    padding: 16px 24px;
+  }
   .hero-cta-row .btn { width: auto; }
   .hero-cta-row .btn-solid { width: 100%; justify-content: space-between; }
 
@@ -1032,6 +1054,42 @@ a.top-bar-item:hover { color: var(--ink-soft); text-decoration: underline; }
 
   .header-cta { display: none; }
   .top-bar-item.top-bar-address { display: none; }
+
+  /* Both numbers have to stay on one line: wrapping doubles the top bar and
+     costs ~50px of a phone screen. Tighter gaps buy the room, and the links
+     get vertical padding so they are a comfortable tap, not a 17px hairline. */
+  .top-bar-inner { gap: 12px; padding: 4px 0; }
+  .top-bar-contacts { gap: 14px; flex-wrap: nowrap; }
+  .top-bar-item { gap: 6px; padding: 6px 0; white-space: nowrap; }
+  .top-bar-social a { padding: 6px; margin: -6px; }
+
+  .wordmark-sub { font-size: 9px; letter-spacing: 0.18em; }
+
+  /* stacked footer links: padding makes the row tappable, the smaller gap
+     keeps the spacing between them looking the same as before */
+  .footer-meta { gap: 2px; }
+  .footer-meta a,
+  .footer-meta span { padding: 6px 0; }
+
+  .back-link { padding: 6px 0; }
+
+  /* Micro-labels: 10px wide-tracked uppercase reads fine at arm's length on a
+     desktop, but is cramped on a phone held closer to a smaller screen. */
+  .stat-label,
+  .hermose-fact,
+  .process-index,
+  .look-desc,
+  .map-plate,
+  .filter-group-title,
+  .product-category { font-size: 11px; }
+
+  .form-checkbox-row input[type="checkbox"] { width: 20px; height: 20px; }
+}
+
+/* Very narrow phones (iPhone SE and friends): the second number no longer
+   fits beside the first, and a wrapped bar is worse than one number. */
+@media (max-width: 359px) {
+  .top-bar-contacts .top-bar-item:nth-child(2) { display: none; }
 }
 
 /* ==========================================================================
@@ -1118,7 +1176,7 @@ h1.page-title {
 
 .catalog-filters {
   position: sticky;
-  top: 110px;
+  top: calc(var(--header-h) + 24px);
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -1326,20 +1384,24 @@ h1.page-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin-top: 16px;
-  min-height: 8px;
+  margin-top: 8px;
+  min-height: 32px;
 }
 
+/* The dot stays 8px, but padding grows the hit area to 32px so it can be
+   tapped on a phone; background-clip keeps the paint on the dot itself. */
 .product-gallery-dots button {
   width: 8px;
   height: 8px;
+  padding: 12px;
+  box-sizing: content-box;
   border-radius: 50%;
   background: var(--line-light);
+  background-clip: content-box;
   transition: background-color 0.3s var(--ease);
 }
 
-.product-gallery-dots button.is-active { background: var(--cognac); }
+.product-gallery-dots button.is-active { background: var(--cognac); background-clip: content-box; }
 
 .product-detail-sizes {
   font-size: 14px;
@@ -1509,7 +1571,7 @@ h1.page-title {
   background-position: center, right top;
   background-repeat: no-repeat, no-repeat;
   /* same as the hero: the header takes real space above this section */
-  min-height: calc(100svh - var(--header-h, 123px));
+  min-height: calc(100svh - var(--header-h));
   display: flex;
   align-items: center;
   padding: var(--section-pad-y-sm) 0 var(--section-pad-y-sm);
@@ -1555,6 +1617,22 @@ h1.page-title {
 }
 
 .legal-content strong { color: var(--ink); }
+
+/* shown only if the lead could not be delivered — never silently swallow it */
+.send-error[hidden] { display: none; }
+
+.send-error {
+  display: block;
+  margin-bottom: 24px;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: rgba(196, 138, 46, 0.12);
+  border-left: 2px solid var(--accent-on-light);
+}
+
+.send-error a { font-weight: 600; color: var(--accent-on-light); text-decoration: underline; }
 
 /* shown only when the request came from a product page.
    the explicit [hidden] rule is required: display:flex would otherwise
@@ -1605,7 +1683,7 @@ h1.page-title {
   }
   .filter-group { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; }
   .filter-group-title { margin: 0 6px 0 0; }
-  .filter-btn { border-left: none; padding-left: 0; }
+  .filter-btn { border-left: none; padding: 11px 0; padding-left: 0; }
   .filter-btn.is-active { border-left: none; text-decoration: underline; text-underline-offset: 3px; }
   .filter-btn--all { margin-bottom: 0; margin-right: 10px; }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); }

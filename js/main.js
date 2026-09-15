@@ -7,7 +7,7 @@
     uk: {
       meta: {
         title: "СЕНАТОР - чоловіча класика у Миколаєві",
-        description: "Салон чоловічої класики у Миколаєві. Офіційний представник HERMOSE в Україні. Костюми, піджаки, сорочки та персональний підбір образу."
+        description: "Салон чоловічої класики у Миколаєві. Офіційний представник HERMOSE в Україні. Костюми, брюки, сорочки та персональний підбір образу."
       },
       brand: { name: "СЕНАТОР" },
       nav: {
@@ -19,7 +19,7 @@
       shop: {
         catalogEyebrow: "КАТАЛОГ СЕНАТОРА",
         catalogTitle: "Всі образи в одному місці.",
-        catalogLead: "Костюми, піджаки, сорочки та аксесуари HERMOSE. Фото та описи ще уточнюються.",
+        catalogLead: "Костюми, брюки та сорочки HERMOSE - класика, яку носять щодня і на особливі події.",
         filterAll: "Всі товари",
         sortLabel: "Сортувати",
         sortNameAsc: "За назвою (А-Я)",
@@ -41,6 +41,7 @@
         formErrorRequired: "Заповніть це поле",
         formConsent: "Погоджуюсь з <a href=\"privacy.html\" target=\"_blank\">політикою конфіденційності</a>",
         consultationSubmitCta: "ЗАМОВИТИ КОНСУЛЬТАЦІЮ <span aria-hidden=\"true\">↗</span>",
+        sendError: "Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам: <a href=\"tel:+380933835654\">+38 (093) 383-56-54</a>",
         callDirectly: "Або зателефонуйте нам напряму: <a href=\"tel:+380631840915\">+380 63 184 09 15</a> (основний) · <a href=\"tel:+380933835654\">+380 93 383 56 54</a> (додатковий)",
         confirmEyebrow: "ЗАЯВКУ ПРИЙНЯТО",
         confirmTitle: "Дякуємо! Ми скоро зв'яжемося.",
@@ -67,7 +68,7 @@
         imageAlt: "Чоловік поправляє манжет піджака в інтер'єрі салону"
       },
       hermose: {
-        body: "Офіційний представник в Україні. Турецький бренд чоловічого одягу, що поєднує класичну школу, сучасний крій, комфорт і виразні матеріали. У салоні СЕНАТОР представлені костюми, піджаки, сорочки та аксесуари HERMOSE для ділових і вечірніх образів.",
+        body: "Офіційний представник в Україні. Турецький бренд чоловічого одягу, що поєднує класичну школу, сучасний крій, комфорт і виразні матеріали. У салоні СЕНАТОР представлені костюми, брюки та сорочки HERMOSE для ділових і вечірніх образів.",
         fact: "ВИРОБНИЦТВО · ТУРЕЧЧИНА",
         imageAlt: "Два чоловіки в костюмах HERMOSE, світлому та темно-синьому"
       },
@@ -108,7 +109,7 @@
     en: {
       meta: {
         title: "SENATOR - Classic Menswear in Mykolaiv",
-        description: "A classic menswear salon in Mykolaiv. Official representative of HERMOSE in Ukraine. Suits, jackets, shirts, and personal styling."
+        description: "A classic menswear salon in Mykolaiv. Official representative of HERMOSE in Ukraine. Suits, trousers, shirts, and personal styling."
       },
       brand: { name: "SENATOR" },
       nav: {
@@ -120,7 +121,7 @@
       shop: {
         catalogEyebrow: "SENATOR CATALOG",
         catalogTitle: "All the looks in one place.",
-        catalogLead: "Suits, blazers, shirts, and HERMOSE accessories. Photos and descriptions are still being finalized.",
+        catalogLead: "HERMOSE suits, trousers and shirts - classics for both working days and occasions.",
         filterAll: "All products",
         sortLabel: "Sort",
         sortNameAsc: "Name (A-Z)",
@@ -142,6 +143,7 @@
         formErrorRequired: "Please fill in this field",
         formConsent: "I agree to the <a href=\"privacy.html\" target=\"_blank\">privacy policy</a>",
         consultationSubmitCta: "REQUEST A CALL BACK <span aria-hidden=\"true\">↗</span>",
+        sendError: "Could not send the request. Please try again or call us: <a href=\"tel:+380933835654\">+38 (093) 383-56-54</a>",
         callDirectly: "Or call us directly: <a href=\"tel:+380631840915\">+380 63 184 09 15</a> (main) · <a href=\"tel:+380933835654\">+380 93 383 56 54</a> (alternative)",
         confirmEyebrow: "REQUEST RECEIVED",
         confirmTitle: "Thank you! We'll be in touch soon.",
@@ -168,7 +170,7 @@
         imageAlt: "A man adjusting a jacket cuff inside the salon interior"
       },
       hermose: {
-        body: "Official representative in Ukraine. A Turkish menswear brand that combines classic tailoring, a modern cut, comfort, and expressive materials. SENATOR carries HERMOSE suits, blazers, shirts, and accessories for both business and evening looks.",
+        body: "Official representative in Ukraine. A Turkish menswear brand that combines classic tailoring, a modern cut, comfort, and expressive materials. SENATOR carries HERMOSE suits, trousers and shirts for both business and evening looks.",
         fact: "MANUFACTURED · TURKEY",
         imageAlt: "Two men wearing HERMOSE suits, one light and one dark navy"
       },
@@ -304,23 +306,34 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* The header sits in the flow above the hero, so a 100svh hero would push the
-     first screen past the fold. Publish its height and let CSS subtract it. */
+  /* The header is fixed, so body reserves its height as padding and the hero
+     subtracts it from 100svh. Publish the measured value; CSS holds a default
+     for the first paint. Only the resting height counts — the header shrinks
+     once scrolled, and the reserved space must not shrink with it. */
   function initHeaderHeight() {
     var group = document.getElementById("header-group");
     if (!group) return;
 
     var publish = function () {
       var header = document.getElementById("site-header");
-      var scrolled = header && header.classList.contains("is-scrolled");
-      if (scrolled) return; // measure only in the resting state
+      if (header && header.classList.contains("is-scrolled")) return;
+      // ceil, not round: reserving a fraction less would let the first
+      // section slide a pixel under the header
       document.documentElement.style.setProperty(
-        "--header-h", Math.round(group.getBoundingClientRect().height) + "px"
+        "--header-h", Math.ceil(group.getBoundingClientRect().height) + "px"
       );
     };
 
     publish();
+    // the web fonts land after this runs and change the header's height by a
+    // fraction of a pixel — measure again once they are in
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(publish);
     window.addEventListener("resize", publish, { passive: true });
+    // a resize while scrolled is skipped above (wrong state to measure in);
+    // re-publish once the visitor is back at the top to pick the change up
+    window.addEventListener("scroll", function () {
+      if (window.scrollY <= 0) publish();
+    }, { passive: true });
   }
 
   function initProductGallery() {

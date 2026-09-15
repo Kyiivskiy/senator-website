@@ -8,6 +8,10 @@
     return document.documentElement.lang === "en" ? "en" : "uk";
   }
 
+  // kept here rather than in main.js's dictionary: it is the only string this
+  // file needs, and reaching into that closure would couple the two scripts
+  var SENDING_LABEL = { uk: "ВІДПРАВЛЯЄМО…", en: "SENDING…" };
+
   function findProduct(id) {
     var list = window.SENATOR_PRODUCTS || [];
     for (var i = 0; i < list.length; i++) {
@@ -47,16 +51,26 @@
     return valid;
   }
 
+  /* Resolves only once the backend confirms it took the lead. The free Render
+     instance can be cold, so allow a generous timeout before giving up —
+     better a waiting customer than a request that silently disappears. */
   function sendLead(lead) {
-    if (!LEAD_NOTIFY_URL) return;
-    try {
-      fetch(LEAD_NOTIFY_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-API-Key": LEAD_API_KEY },
-        body: JSON.stringify(lead),
-        keepalive: true
-      }).catch(function () {});
-    } catch (err) {}
+    var controller = new AbortController();
+    var timer = setTimeout(function () { controller.abort(); }, 60000);
+
+    return fetch(LEAD_NOTIFY_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-API-Key": LEAD_API_KEY },
+      body: JSON.stringify(lead),
+      signal: controller.signal
+    }).then(function (response) {
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      return response.json();
+    }).then(function (body) {
+      if (!body || body.ok !== true) throw new Error("backend refused the lead");
+    }).finally(function () {
+      clearTimeout(timer);
+    });
   }
 
 
@@ -82,11 +96,21 @@
     var consentBox = document.getElementById("field-consent");
     var consentError = document.getElementById("consent-error");
 
+    var submitBtn = form.querySelector("button[type=submit]");
+    var sendError = document.getElementById("send-error");
+    var submitLabel = submitBtn ? submitBtn.innerHTML : "";
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validateForm(form, consentBox, consentError)) return;
 
       var formData = new FormData(form);
+
+      if (sendError) sendError.hidden = true;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = SENDING_LABEL[currentLang()];
+      }
 
       sendLead({
         type: "consultation",
@@ -95,9 +119,19 @@
         preferredTime: formData.get("callTime"),
         product: product ? product.name[currentLang()] : "",
         website: formData.get("website") // honeypot: filled only by bots
+      }).then(function () {
+        window.location.href = "success.html";
+      }).catch(function () {
+        // never pretend it went through — offer the phone instead
+        if (sendError) {
+          sendError.hidden = false;
+          sendError.scrollIntoView({ block: "nearest" });
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = submitLabel;
+        }
       });
-
-      window.location.href = "success.html";
     });
   }
 

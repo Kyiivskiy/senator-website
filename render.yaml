@@ -13,5 +13,6 @@ services:
         sync: false
       - key: ORDER_API_KEY
         sync: false
+      # comma-separated: the live site plus a local dev server for testing forms
       - key: ALLOWED_ORIGIN
-        value: https://kyiivskiy.github.io
+        value: https://kyiivskiy.github.io,http://localhost:5173
